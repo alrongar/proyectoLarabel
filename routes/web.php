@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SiginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+
+//sigin 
+Route::get('/sigin',[RegisterController::class,'crear'] );
+Route::post('/sigin',[RegisterController::class,'store']);
+
+
+//login
+Route::get('/login',[LoginController::class,'loguear'] );
+Route::post('/login',[LoginController::class,'store'] );
+
+
+
