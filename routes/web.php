@@ -4,7 +4,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +31,9 @@ Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.de
 
 
 
+
+//Route::get('/register', [RegisterController::class, 'create'])->name('register.form');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 
 
