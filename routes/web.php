@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SiginController;
+
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +18,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('home');
 });
 
+Auth::routes();
 
-//sigin 
-Route::get('/sigin',[RegisterController::class,'crear'] );
-Route::post('/sigin',[RegisterController::class,'store']);
+Route::get('/home',[App\Http\Controllers\HomeController::class,'index'])->name('home');
+Route::get('/admin/users',[UserController::class,'index'])->middleware('auth','admin');
+Route::put('/users/{user}/activate',[UserController::class,'activate'])->name('users.activate');
+Route::put('/users/{user}/deactivate',[UserController::class,'deactivate'])->name('users.deactivate');
+Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
 
 
-//login
-Route::get('/login',[LoginController::class,'loguear'] );
-Route::post('/login',[LoginController::class,'store'] );
+
+
 
 
 

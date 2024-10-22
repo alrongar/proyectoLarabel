@@ -1,37 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventify @yield('titulo')</title>
-    @vite('resources/css/layout.css')
-    @vite('resources/css/global.css')
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+
+    <!-- Scripts -->
+    <!--@vite(['resources/css/global.css', 'resources/js/app.js'])-->
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <h1 class="navbar__title">@yield('titulo')</h1>
-        <div class="navbar__links">
-            <a href="/" class="navbar__link">Principal</a>
-            <a href="/sigin" class="navbar__link">Sign in</a>
-            <a href="/login" class="navbar__link">Login</a>
-        </div>
-    </nav>
-    <!-- Content -->
-    <div class="content">
-        @yield('contenido')
-    </div>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer__content">
-            <p class="footer__text">© 2024 Eventify. Todos los derechos reservados.</p>
-            <div class="footer__links">
-                <a href="/about" class="footer__link">Acerca de</a>
-                <a href="/contact" class="footer__link">Contacto</a>
-                <a href="/privacy" class="footer__link">Política de Privacidad</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
+
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
-        </div>
-    </footer>
+        </nav>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
+
+        <footer class="footer">
+            <div class="footer__content">
+                <p class="footer__text">{{ __('© 2024 Event App - All rights reserved') }}</p>
+                <div class="footer__links">
+                    <a href="#" class="footer__link">{{ __('Privacy Policy') }}</a>
+                    <a href="#" class="footer__link">{{ __('Terms of Service') }}</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
 </body>
 </html>
