@@ -23,23 +23,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home',[App\Http\Controllers\HomeController::class,'index'])->name('home');
-Route::get('/admin/users',[UserController::class,'index'])->middleware('auth','admin');
-Route::put('/users/{user}/activate',[UserController::class,'activate'])->name('users.activate');
-Route::put('/users/{user}/deactivate',[UserController::class,'deactivate'])->name('users.deactivate');
-Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
+// HomeController
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// UserController - Admin
+Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users')->middleware('auth', 'admin');
 
+// Activar/desactivar y eliminar usuarios
+Route::put('/users/{user}/activate', [UserController::class, 'activate'])->name('users.activate');
+Route::put('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+// Editar y actualizar perfil de usuario
 Route::get('/profile/{id}', [UserController::class, 'edit'])->name('profile.edit')->middleware('admin');
-Route::post('/profile/{id}', [UserController::class, 'update'])->name('profile.update')->middleware('admin');
-Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users')->middleware('auth','admin');
+Route::put('/profile/{id}', [UserController::class, 'update'])->name('profile.update')->middleware('admin');
 
-
-
-
-//Route::get('/register', [RegisterController::class, 'create'])->name('register.form');
+// Registro
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
 
 
 

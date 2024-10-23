@@ -19,9 +19,9 @@ class UserController extends Controller
 
     // Activar usuario
     public function activate($id)
-    {   
+    {
         $user = User::findOrFail($id);
-        $user-> actived = 1;
+        $user->actived = 1;
         $user->save();
         return redirect()->back()->with('success', 'Usuario activado.');
     }
@@ -29,37 +29,40 @@ class UserController extends Controller
     public function deactivate($id)
     {
         $user = User::findOrFail($id);
-        $user-> actived = 0;
+        $user->actived = 0;
         $user->save();
         return redirect()->back()->with('success', 'Usuario desactivado.');
     }
 
     public function destroy(User $user)
-{
-    $user->deleted = 1; 
-    $user->save();
-    return redirect()->back()->with('success', 'Usuario eliminado.');
-}
+    {
+        $user->deleted = 1;
+        $user->save();
+        return redirect()->back()->with('success', 'Usuario eliminado.');
+    }
 
 
     public function edit($id)
     {
+        // Obtener el usuario por su ID o fallar si no existe
         $user = User::findOrFail($id);
+
+        // Redirigir a la vista para actualizar el usuario
         return view('auth.update', compact('user'));
     }
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
 
-    $user = User::findOrFail($id);
-    $user->name = $request->input('name');
-    $user->save();
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->save();
 
-    
-    return redirect()->route('admin.users')->with('success', 'Nombre actualizado exitosamente.');
-}
+
+        return redirect()->route('admin.users')->with('success', 'Nombre actualizado exitosamente.');
+    }
 
 
 }
