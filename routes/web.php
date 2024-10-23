@@ -31,6 +31,12 @@ Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.de
 
 
 
+Route::get('/profile/{id}', [UserController::class, 'edit'])->name('profile.edit')->middleware('admin');
+Route::post('/profile/{id}', [UserController::class, 'update'])->name('profile.update')->middleware('admin');
+Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users')->middleware('auth','admin');
+
+
+
 
 //Route::get('/register', [RegisterController::class, 'create'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
