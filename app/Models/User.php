@@ -25,6 +25,7 @@ class User extends Authenticatable
         'actived',
         'email_confirmed',
         'remember_token',
+        'image',
     ];
 
     /**

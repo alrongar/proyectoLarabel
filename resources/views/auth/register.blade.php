@@ -12,7 +12,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -80,7 +80,31 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-end">{{ __('Rol') }}</label>
+                            <div class="col-md-6">
+                                <!-- Radio button para usuario -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rol" id="user" value="u" {{ old('rol') == 'u' ? 'checked' : '' }} required>
+                                    <label class="form-check-label" for="user">
+                                        {{ __('Usuario') }}
+                                    </label>
+                                </div>
+                                <!-- Radio button para organizador -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rol" id="organizer" value="o" {{ old('rol') == 'o' ? 'checked' : '' }} required>
+                                    <label class="form-check-label" for="organizer">
+                                        {{ __('Organizador') }}
+                                    </label>
+                                </div>
 
+                                @error('rol')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <label for="image" class="form-label">Subir Imagen</label>
                             <div>

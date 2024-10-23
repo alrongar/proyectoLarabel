@@ -14,7 +14,7 @@ class RegisterController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         // Validar los campos del formulario
         $request->validate([
             'name' => 'required|string|max:255',              // Nombre requerido, tipo string, máximo 255 caracteres
@@ -24,14 +24,14 @@ class RegisterController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif',  // Imagen opcional, debe ser un archivo de imagen, máximo 2MB
             'rol' => 'required|in:u,o',   // Rol requerido, debe ser 'u' para usuario o 'o' para organizador (radio button o checkbox)
         ]);
-
-        $imagePath = '';  
+        //dd($request->all());
+        $imagePath = null;  
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             
             $imagePath = $request->file('image')->store('images', 'public');
         }
-
+       
         // Crear el usuario
         $user = User::create([
             'name' => $request->name,

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('rol', ['a', 'u','o']);
-            $table->string('profile_picture')->nullable();
-            $table->tinyInteger('actived')->default(1);
+            $table->string('image')->nullable();
+            $table->tinyInteger('actived')->default(0);
             $table->tinyInteger('email_confirmed')->default(0);
             $table->tinyInteger('deleted')->default(0);
             $table->string('remember_token', 100)->nullable();
