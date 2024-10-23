@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('deleted', 0)
-            ->where('role', '!=', 'a')
+            ->where('rol', '!=', 'a')
             ->get();
 
         return view('admin.users', compact('users'));

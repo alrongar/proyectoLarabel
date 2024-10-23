@@ -81,23 +81,23 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="image" class="form-label">Subir Imagen</label>
+                            <div>
+                                <input action="{{ route('register.store') }}" id="image-dropzone" type="file"
+                                    name="imagen" enctype="multipart/form-data">
+                                @csrf
 
+                                </input>
+                                @error('image')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
+                        </div>
                     </form>
 
-                    <div class="row mb-3">
-                        <label for="image" class="form-label">Subir Imagen</label>
-                        <form action="{{ route('register.store') }}" class="dropzone"
-                            id="image-dropzone" enctype="multipart/form-data">
-                            @csrf
-                            <div class="dz-message">
-                                Arrastra y suelta una imagen aquí o haz clic para subirla.
-                            </div>
-                        </form>
-                        @error('image')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+
 
                 </div>
             </div>
@@ -107,5 +107,5 @@
 @endsection
 
 @section("js")
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></scrip>
-@endsection
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></scrip >
+        @endsection
