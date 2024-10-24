@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -36,9 +37,13 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),  // Hash para la contraseña
-            'image' => $imagePath,  // Guardar la ruta de la imagen
+            'password' => Hash::make($request->password),  
+            'image' => $imagePath,  
             'rol' => $request->rol,
+            'actived' => 0,
+            'email_confirmed' => 0,
+            'remember_token' => Str::random(10),
+
         ]);
 
         // Redirigir con mensaje de éxito

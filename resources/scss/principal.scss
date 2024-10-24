@@ -1,0 +1,66 @@
+.dashboard {
+    &__header {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  
+    &__controls {
+      margin-top: 1rem;
+    }
+  
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    &__body {
+      padding: 2rem;
+      background-color: #f9f9f9;
+    }
+  
+    &__message {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+  }
+  
+  .button {
+    &--primary {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  
+    &--link {
+      background: none;
+      color: #007bff;
+      text-decoration: underline;
+      padding: 0;
+      margin-left: 10px;
+  
+      &:hover {
+        color: #0056b3;
+      }
+    }
+  
+    &--secondary {
+      background-color: #28a745;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #218838;
+      }
+    }
+  }
+  
