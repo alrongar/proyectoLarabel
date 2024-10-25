@@ -15,18 +15,28 @@
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                <input id="name" type="text" class="form-control"
                                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                @error('name')
+                                <!--@error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror-->
                             </div>
                         </div>
 
@@ -35,14 +45,14 @@
                                 class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                <input id="email" type="email" class="form-control"
                                     name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                @error('email')
+                                <!--@error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror-->
                             </div>
                         </div>
 
@@ -52,14 +62,14 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    class="form-control" name="password"
                                     required autocomplete="new-password">
 
-                                @error('password')
+                                <!--@error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror-->
                             </div>
                         </div>
 
@@ -91,36 +101,39 @@
                                     </label>
                                 </div>
 
-                                @error('rol')
+                                <!--@error('rol')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror-->
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="image" class="form-label">Subir Imagen</label>
-                            <div>
-                                <input action="{{ route('register.store') }}" id="image-dropzone" type="file"
-                                    name="imagen" enctype="multipart/form-data">
+                            <label for="image" class="col-md-4 col-form-label text-md-end">Subir Imagen</label>
+                            <div class="col-md-6">
+                                <input id="image-dropzone" type="file"
+                                    name="image">
                                 @csrf
 
                                 </input>
-                                @error('image')
+                                <!--@error('image')
                                     <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                @enderror-->
                             </div>
-                            
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Register') }}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
                         </div>
+
+
                     </form>
+
 
 
 
@@ -132,5 +145,5 @@
 @endsection
 
 @section("js")
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></scrip >
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
         @endsection

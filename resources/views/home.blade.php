@@ -7,12 +7,12 @@
             <div class="card dashboard">
                 <div class="dashboard__header card-header">{{ __('Dashboard') }}</div>
                 <div class="dashboard__controls row mb-0">
-                    <div class="dashboard__buttons col-md-6 offset-md-4">
+                    <!--<div class="dashboard__buttons col-md-6 offset-md-4">
                         <button type="submit" class="button button--primary">
                             {{ __('Register') }}
                         </button>
                         
-                    </div>
+                    </div>-->
                 </div>
                 <div class="dashboard__body card-body">
                     @if (session('status'))

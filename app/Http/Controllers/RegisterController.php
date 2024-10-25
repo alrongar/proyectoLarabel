@@ -47,6 +47,7 @@ class RegisterController extends Controller
         ]);
 
         // Redirigir con mensaje de éxito
-        return back()->with('success', 'Usuario registrado correctamente.');
+        
+        return redirect()->route('home')->with('success', 'Usuario registrado con éxito!');
     }
 }

@@ -40,6 +40,7 @@ Route::put('/profile/{id}', [UserController::class, 'update'])->name('profile.up
 
 // Registro
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::post('/register', [RegisterController::class, 'store'])->name('register');
 
 
 
