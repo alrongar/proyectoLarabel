@@ -12,11 +12,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+
     @yield("css")
 
     <!-- Scripts -->
-    @vite(['resources/css/global.css', 'resources/js/app.js','resources/scss/principal.scss','resources/scss/home.scss'])
+    @vite([ 'resources/js/app.js','resources/scss/principal.scss','resources/scss/home.scss','resources/scss/admin.scss'])
 </head>
 <body>
     <div id="app">
