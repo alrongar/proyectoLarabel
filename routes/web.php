@@ -1,10 +1,9 @@
 <?php
 
-
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ConfirmAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +39,6 @@ Route::put('/profile/{id}', [UserController::class, 'update'])->name('profile.up
 
 // Registro
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-Route::post('/register', [RegisterController::class, 'store'])->name('register');
 
-
-
-
-
+// Confirmar cuenta con email
+Route::get('/confirmar-cuenta/{token}', [ConfirmAccountController::class, 'confirmarCuenta']);

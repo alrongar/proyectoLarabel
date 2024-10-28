@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Mail\ConfirmacionRegistro;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -22,8 +22,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
-    use RegistersUsers;
 
     /**
      * Where to redirect users after registration.
@@ -43,18 +41,43 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Show the application registration form.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\View\View
      */
-    protected function validator(array $data)
+    public function showRegistrationForm()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        return view('auth.register');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'rol' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
+
+        // Crear el usuario
+        $user = $this->create($request->all());
+
+        // Generar un token de confirmación
+        $token = Str::random(60);
+        $user->remember_token = $token;
+        $user->save();
+
+        // Enviar correo de confirmación
+        Mail::to($user->email)->send(new ConfirmacionRegistro($user, $token));
+
+        // Redirigir con mensaje de éxito
+        return redirect()->route('home')->with('success', 'Usuario registrado con éxito! Te hemos enviado un correo de confirmación.');
     }
 
     /**
@@ -75,9 +98,4 @@ class RegisterController extends Controller
             'remember_token' => Str::random(10),
         ]);
     }
-
-    protected function registered(Request $request, $user)
-{
-    $user->sendEmailVerificationNotification(); // Envía el correo de verificación
-}
 }

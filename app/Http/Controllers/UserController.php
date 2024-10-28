@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\ActivacionCuenta;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -21,9 +23,18 @@ class UserController extends Controller
     public function activate($id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->email_confirmed != 1) {
+            return redirect()->back()->with('error', 'El usuario no ha confirmado su correo electrónico.');
+        }
+
         $user->actived = 1;
         $user->save();
-        return redirect()->back()->with('success', 'Usuario activado.');
+
+        // Enviar correo de activación
+        Mail::to($user->email)->send(new ActivacionCuenta($user));
+
+        return redirect()->back()->with('success', 'Usuario activado y notificado.');
     }
 
     public function deactivate($id)
@@ -41,7 +52,6 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Usuario eliminado.');
     }
 
-
     public function edit($id)
     {
         // Obtener el usuario por su ID o fallar si no existe
@@ -50,6 +60,7 @@ class UserController extends Controller
         // Redirigir a la vista para actualizar el usuario
         return view('auth.update', compact('user'));
     }
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -60,9 +71,6 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->save();
 
-
         return redirect()->route('admin.users')->with('success', 'Nombre actualizado exitosamente.');
     }
-
-
 }
