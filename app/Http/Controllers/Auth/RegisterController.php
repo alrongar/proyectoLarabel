@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -69,9 +70,14 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'actived' => 0,
-            'email_confirmed' => 0, 
-            'role' => 'u', 
-            'remember_token' => Str::random(10), 
+            'role' => $data['rol'],
+            'email_confirmed' => 0,
+            'remember_token' => Str::random(10),
         ]);
     }
+
+    protected function registered(Request $request, $user)
+{
+    $user->sendEmailVerificationNotification(); // Envía el correo de verificación
+}
 }

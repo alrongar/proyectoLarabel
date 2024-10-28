@@ -1,74 +1,89 @@
+// Variables para colores
+$primary-color: #007bff;
+$primary-hover: #0056b3;
+$footer-background: #f1f1f1;
+
 .navbar {
-    &__brand {
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-  
-    &__toggler {
-      border: none;
-    }
-  
-    &__collapse {
-      justify-content: space-between;
-    }
-  
-    &__nav {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-  
-      & .navbar__item {
-        margin-left: 15px;
-      }
-  
-      & .navbar__link {
-        color: #007bff;
-        text-decoration: none;
-        
-        &:hover {
-          color: #0056b3;
-        }
-      }
-    }
-  
-    &__dropdown {
-      &-item {
-        cursor: pointer;
-      }
-    }
+  &__brand {
+    font-weight: bold;
+    font-size: 1.5rem;
   }
-  
-  .main {
-    padding-top: 2rem;
+
+  &__toggler {
+    border: none;
   }
-  
-  .footer {
-    background-color: #f1f1f1;
-    padding: 2rem 0;
-    text-align: center;
-  
-    &__content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+  &__collapse {
+    justify-content: space-between; 
+  }
+
+  &__nav {
+    display: flex; 
+    align-items: center; 
+    padding: 0; 
+    margin: 0;
+    list-style: none; 
+
+    & .navbar__item {
+      margin-left: 15px; 
     }
-  
-    &__text {
-      margin-bottom: 1rem;
-    }
-  
-    &__links {
-      display: flex;
-      gap: 15px;
-    }
-  
-    &__link {
-      color: #007bff;
+
+    & .navbar__link {
+      color: $primary-color; 
       text-decoration: none;
-  
-      &:hover {
-        color: #0056b3;
+      transition: color 0.3s ease; 
+
+      &:hover,
+      &:focus {
+        color: $primary-hover; 
       }
     }
   }
-  
+
+  &__dropdown {
+    &-item {
+      cursor: pointer;
+      transition: background-color 0.2s ease; 
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1); 
+      }
+    }
+  }
+}
+
+.main {
+  padding-top: 2rem;
+}
+
+.footer {
+  background-color: $footer-background; 
+  padding: 2rem 0;
+  text-align: center;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__text {
+    margin-bottom: 1rem;
+  }
+
+  &__links {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__link {
+    color: $primary-color; 
+    text-decoration: none;
+    transition: color 0.3s ease; 
+
+    &:hover,
+    &:focus {
+      color: $primary-hover; 
+    }
+  }
+}

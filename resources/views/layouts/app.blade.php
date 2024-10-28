@@ -16,7 +16,7 @@
     @yield("css")
 
     <!-- Scripts -->
-    @vite([ 'resources/js/app.js','resources/scss/principal.scss','resources/scss/home.scss','resources/scss/admin.scss'])
+    @vite(['resources/scss/app.scss', 'resources/scss/home.scss', 'resources/scss/principal.scss', 'resources/scss/admin.scss', 'resources/scss/_variables.scss'])
 </head>
 <body>
     <div id="app">
@@ -36,11 +36,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar__nav navbar-nav ms-auto">
-                        <!-- Authentication Links -->
+                      
                         @if (Auth::check() && Auth::user()->rol === 'a')
-                            <a href="{{ route('admin.users') }}" class="button button--link">
-                                {{ __('Admin Panel') }}
-                            </a>
+                            <li class="navbar__item nav-item "> 
+                                <a href="{{ route('admin.users') }}" class="button button--link nav-link">
+                                    {{ __('Admin Panel') }}
+                                </a>
+                            </li>
                         @endif
                         @guest
                             @if (Route::has('login'))
@@ -54,7 +56,6 @@
                                     <a class="navbar__link nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-
                         @else
                             <li class="navbar__item nav-item dropdown">
                                 <a id="navbarDropdown" class="navbar__link nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
