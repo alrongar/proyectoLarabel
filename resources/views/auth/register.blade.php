@@ -5,145 +5,83 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+<div class="register-page">
+    <div class="register-form">
+        <h3 class="register-form__title">{{ __('Register') }}</h3>
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+            @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                        @csrf
+            @if ($errors->any())
+                <div class="register-form__alert alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control"
-                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                <!--@error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror-->
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                <!--@error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror-->
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password"
-                                    class="form-control" name="password"
-                                    required autocomplete="new-password">
-
-                                <!--@error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror-->
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm"
-                                class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label text-md-end">{{ __('Rol') }}</label>
-                            <div class="col-md-6">
-                                <!-- Radio button para usuario -->
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rol" id="user" value="u" {{ old('rol') == 'u' ? 'checked' : '' }} required>
-                                    <label class="form-check-label" for="user">
-                                        {{ __('Usuario') }}
-                                    </label>
-                                </div>
-                                <!-- Radio button para organizador -->
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="rol" id="organizer" value="o" {{ old('rol') == 'o' ? 'checked' : '' }} required>
-                                    <label class="form-check-label" for="organizer">
-                                        {{ __('Organizador') }}
-                                    </label>
-                                </div>
-
-                                <!--@error('rol')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror-->
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="image" class="col-md-4 col-form-label text-md-end">Subir Imagen</label>
-                            <div class="col-md-6">
-                                <input id="image-dropzone" type="file"
-                                    name="image">
-                                @csrf
-
-                                </input>
-                                <!--@error('image')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror-->
-                            </div>
-
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                    </form>
-
-
-
-
+            <div class="register-form__field row mb-3">
+                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                <div class="col-md-6">
+                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                 </div>
             </div>
-        </div>
+
+            <div class="register-form__field row mb-3">
+                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                <div class="col-md-6">
+                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+                </div>
+            </div>
+
+            <div class="register-form__field row mb-3">
+                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                <div class="col-md-6">
+                    <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">
+                </div>
+            </div>
+
+            <div class="register-form__field row mb-3">
+                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                <div class="col-md-6">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                </div>
+            </div>
+
+            <div class="register-form__field row mb-3">
+                <label class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rol" id="user" value="u" {{ old('rol') == 'u' ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="user">{{ __('User') }}</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="rol" id="organizer" value="o" {{ old('rol') == 'o' ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="organizer">{{ __('Organizer') }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="register-form__field row mb-3">
+                <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Upload Image') }}</label>
+                <div class="col-md-6">
+                    <input id="image-dropzone" type="file" name="image" class="form-control">
+                </div>
+            </div>
+
+            <div class="register-form__footer row mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="register-form__button btn btn-primary">
+                        {{ __('Register') }}
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 @endsection
 
 @section("js")
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
-        @endsection
+@endsection

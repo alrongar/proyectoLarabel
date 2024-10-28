@@ -16,63 +16,61 @@
     @yield("css")
 
     <!-- Scripts -->
-    @vite(['resources/scss/app.scss', 'resources/scss/home.scss', 'resources/scss/principal.scss', 'resources/scss/admin.scss', 'resources/scss/_variables.scss'])
+    @vite(['resources/scss/nav-foot.scss','resources/scss/app.scss','resources/scss/-variables.scss',
+            'resources/scss/login.scss','resources/scss/admin.scss','resources/scss/register.scss',
+            'resources/scss/update.scss'])
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (incluye Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app" class="app">
+        <nav class="app__navbar navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar__brand navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="app__navbar-brand navbar-brand" href="{{ url('/') }}">
+                    Eventify  <!-- Cambiado de Laravel a Eventify -->
                 </a>
-                <button class="navbar__toggler navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="navbar__collapse collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar__nav navbar-nav me-auto">
-                    </ul>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar__nav navbar-nav ms-auto">
-                      
+                    <ul class="navbar-nav ms-auto">
                         @if (Auth::check() && Auth::user()->rol === 'a')
-                            <li class="navbar__item nav-item "> 
-                                <a href="{{ route('admin.users') }}" class="button button--link nav-link">
-                                    {{ __('Admin Panel') }}
-                                </a>
+                            <li class="nav-item"> 
+                                <a href="{{ route('admin.users') }}" class="nav-link">{{ __('Admin Panel') }}</a>
                             </li>
                         @endif
                         @guest
                             @if (Route::has('login'))
-                                <li class="navbar__item nav-item">
-                                    <a class="navbar__link nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
                             @if (Route::has('register'))
-                                <li class="navbar__item nav-item">
-                                    <a class="navbar__link nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li class="navbar__item nav-item dropdown">
-                                <a id="navbarDropdown" class="navbar__link nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
-
-                                <div class="navbar__dropdown dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="navbar__dropdown-item dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('profile.edit', Auth::user()->id) }}">{{ __('Edit Profile') }}</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                         @endguest
                     </ul>
@@ -80,16 +78,16 @@
             </div>
         </nav>
 
-        <main class="main py-4">
+        <main class="app__main py-4">
             @yield('content')
         </main>
 
-        <footer class="footer">
-            <div class="footer__content container">
-                <p class="footer__text">{{ __('© 2024 Event App - All rights reserved') }}</p>
-                <div class="footer__links">
-                    <a href="#" class="footer__link">{{ __('Privacy Policy') }}</a>
-                    <a href="#" class="footer__link">{{ __('Terms of Service') }}</a>
+        <footer class="app__footer">
+            <div class="app__footer-content container">
+                <p class="app__footer-text">{{ __('© 2024 Event App - All rights reserved') }}</p>
+                <div class="app__footer-links">
+                    <a href="#" class="app__footer-link">{{ __('Privacy Policy') }}</a>
+                    <a href="#" class="app__footer-link">{{ __('Terms of Service') }}</a>
                 </div>
             </div>
         </footer>

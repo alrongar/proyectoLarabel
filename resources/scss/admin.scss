@@ -1,137 +1,112 @@
-// Variables para colores
-$primary-color: #007bff; // Color primario
-$primary-hover: #0056b3; // Color de hover
-$footer-background: #f1f1f1; // Fondo del footer
-$table-header-bg: #f8f9fa; // Fondo del encabezado de la tabla
-$table-border-color: #000; // Color de borde de la tabla
-$dropdown-hover-bg: rgba(0, 0, 0, 0.1); // Fondo del hover del dropdown
-$text-color: #333; // Color de texto general
-
-.navbar {
-  &__brand {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: $primary-color; // Color de la marca
-  }
-
-  &__toggler {
-    border: none;
-    background-color: $primary-color; // Fondo del toggler
-    color: #fff; // Color del icono del toggler
-  }
-
-  &__collapse {
-    justify-content: space-between;
-  }
-
-  &__nav {
+/* Estilos Generales del Panel de Administración */
+.admin {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    & .navbar__item {
-      margin-left: 15px;
-    }
-
-    & .navbar__link {
-      color: $primary-color; 
-      text-decoration: none;
-      transition: color 0.3s ease; 
-
-      &:hover,
-      &:focus {
-        color: $primary-hover; 
-      }
-    }
+    padding: 30px;
+    background-color: #f9f9f9; // Fondo claro para el panel de admin
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
-
-  &__dropdown {
-    &-item {
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        background-color: $dropdown-hover-bg; // Color de fondo del hover del dropdown
-      }
-    }
-  }
-}
-
-.main {
-  padding-top: 2rem;
-
-  .dashboard__table {
+  
+  .admin__header {
     width: 100%;
-    border-collapse: collapse;
-
-    &-header {
-      background-color: $table-header-bg; // Color de fondo del encabezado
-      align-items: center; 
-      border: 1.5px solid $table-border-color; // Color del borde de la tabla
+    background-color: #3366ff; // Fondo del encabezado
+    color: #ffffff; // Color del texto del encabezado
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 10px 10px 0 0; // Bordes redondeados en la parte superior
+  
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 0.5px; // Espaciado entre letras
     }
-
-    &-row {
-      margin-bottom: 10px; 
-
-      & td {
-        border: 1.5px solid $table-border-color; // Color de borde de las celdas
-        text-align: center; 
-        border-radius: 20px; 
-        justify-content: center;
-
-        .dashboard__table-content {
-          display: flex; 
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-
-          .dashboard__table-item {
-            flex-grow: 1;             
-            text-align: center; 
-            padding: 20px;
-            margin: 0px 20px;
-            display: flex;
-            justify-content: space-evenly;  
-            align-items: center;      
-            color: $text-color; // Color del texto dentro de la tabla
+  }
+  
+  /* Estilo de la Tarjeta del Dashboard */
+  .admin__card {
+    background-color: #ffffff; // Fondo de las tarjetas
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); // Sombra más pronunciada
+    border-radius: 10px;
+    padding: 25px;
+    width: 100%;
+    margin: 20px 0;
+    transition: transform 0.3s ease; // Efecto de elevación al pasar el mouse
+  
+    &:hover {
+      transform: translateY(-5px); // Eleva la tarjeta al pasar el mouse
+    }
+  
+    &__title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333; // Color del título de la tarjeta
+      margin-bottom: 15px;
+    }
+  
+    &__status {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #ff9800; // Color del mensaje de estado
+    }
+  
+    &__table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      thead {
+        background-color: #f0f0f0; // Color de fondo del encabezado de la tabla
+        color: #333;
+  
+        th {
+          padding: 15px;
+          text-align: left;
+          border-bottom: 1px solid #ccc; // Añadir borde inferior a las celdas del encabezado
+          font-weight: bold; // Negrita en el encabezado
+        }
+      }
+  
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: #fafafa; // Alternar colores en filas
+          }
+  
+          &:hover {
+            background-color: #f0f9ff; // Color de fondo en hover
+          }
+  
+          td {
+            padding: 15px;
+            border-bottom: 1px solid #ccc; // Línea separadora entre filas
+            border-right: 1px solid #ccc; // Añadir borde derecho para separar columnas
+            font-size: 14px; // Tamaño de fuente
+  
+            &:last-child {
+              border-right: none; // Eliminar borde derecho en la última columna
+            }
+  
+            .button {
+              margin-right: 5px; // Espaciado entre botones
+              color: #ffffff; // Color del texto del botón
+              background-color: #3366ff; // Fondo del botón de acción
+              border: none;
+              border-radius: 4px;
+              padding: 10px 15px;
+              cursor: pointer;
+              text-decoration: none;
+              text-align: center;
+              transition: background-color 0.3s; // Transición suave en el hover
+  
+              &:hover {
+                background-color: darken(#3366ff, 10%); // Efecto hover
+              }
+            }
           }
         }
       }
     }
   }
-}
-
-.footer {
-  background-color: $footer-background;
-  padding: 2rem 0;
-  text-align: center;
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  &__text {
-    margin-bottom: 1rem;
-    color: $text-color; // Color del texto del footer
-  }
-
-  &__links {
-    display: flex;
-    gap: 15px;
-  }
-
-  &__link {
-    color: $primary-color; 
-    text-decoration: none;
-    transition: color 0.3s ease;
-
-    &:hover,
-    &:focus {
-      color: $primary-hover; 
-    }
-  }
-}
+  

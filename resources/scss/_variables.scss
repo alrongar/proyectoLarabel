@@ -1,7 +1,16 @@
-// Body
-$body-bg: #f8fafc;
+// resources/scss/variables.scss
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$color_1: white; // Color principal (texto)
+$color_2: #333; // Color secundario (texto)
+$color_3: #666; // Color de texto menor
+$color_4: #3366ff; // Color para enlaces y botones
+$background-color_1: #ffffff; // Fondo claro
+$background-color_2: #3366ff; // Fondo principal
+$background-color_3: #2554cc; // Fondo para hover y botones
+
+$border-radius: 8px; // Radio de borde común
+$box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); // Sombra común
+
+// Estilos comunes para botones
+$button-padding: 10px;
+$button-font-size: 16px;

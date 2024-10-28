@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ConfirmAccountController;
 
 /*
@@ -42,3 +43,6 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 
 // Confirmar cuenta con email
 Route::get('/confirmar-cuenta/{token}', [ConfirmAccountController::class, 'confirmarCuenta']);
+
+//log out 
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

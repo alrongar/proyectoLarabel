@@ -6,7 +6,7 @@
         <div class="dashboard">
             <div class="dashboard__card">
                 <div class="dashboard__body">
-                    <h1 class="dashboard__title">Usuarios desactivados</h1>
+                    <h1 class="dashboard__title">Usuarios Desactivados</h1>
 
                     @if (session('status'))
                         <div class="dashboard__status">{{ session('status') }}</div>
@@ -23,44 +23,34 @@
                         <tbody class="dashboard__table-body">
                             @foreach($users as $user)
                                 <tr class="dashboard__table-row">
-                                    <td colspan="3">
-                                        <div class="dashboard__table-cell">
-                                            <div class="dashboard__table-content">
-                                                <div class="dashboard__table-item">
-                                                    <span>{{ $user->name }}</span>
-                                                </div>
-                                                <div class="dashboard__table-item">
-                                                    <span>{{ $user->email }}</span>
-                                                </div>
-                                                <div class="dashboard__table-item">
-                                                    @if($user->actived)
-                                                        <form action="{{ route('users.deactivate', $user->id) }}" method="POST"
-                                                            style="display: inline;">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <button type="submit" class="button button--warning">Desactivar</button>
-                                                        </form>
-                                                    @else
-                                                        <form action="{{ route('users.activate', $user->id) }}" method="POST"
-                                                            style="display: inline;">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <button type="submit" class="button button--success">Activar</button>
-                                                        </form>
-                                                    @endif
+                                    <td class="dashboard__table-cell">
+                                        <span>{{ $user->name }}</span>
+                                    </td>
+                                    <td class="dashboard__table-cell">
+                                        <span>{{ $user->email }}</span>
+                                    </td>
+                                    <td class="dashboard__table-cell">
+                                        @if($user->actived)
+                                            <form action="{{ route('users.deactivate', $user->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="button button--warning">Desactivar</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('users.activate', $user->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="button button--success">Activar</button>
+                                            </form>
+                                        @endif
 
-                                                    <a href="{{ route('profile.edit', $user->id) }}"
-                                                        class="button button--primary">Editar</a>
+                                        <a href="{{ route('profile.edit', $user->id) }}" class="button button--primary">Editar</a>
 
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                        style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="button button--danger">Borrar</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="button button--danger">Borrar</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
