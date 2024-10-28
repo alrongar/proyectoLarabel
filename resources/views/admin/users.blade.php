@@ -26,9 +26,13 @@
                                     <td colspan="3">
                                         <div class="dashboard__table-cell">
                                             <div class="dashboard__table-content">
-                                                <span>{{ $user->name }}</span>
-                                                <span>{{ $user->email }}</span>
-                                                <span>
+                                                <div class="dashboard__table-item">
+                                                    <span>{{ $user->name }}</span>
+                                                </div>
+                                                <div class="dashboard__table-item">
+                                                    <span>{{ $user->email }}</span>
+                                                </div>
+                                                <div class="dashboard__table-item">
                                                     @if($user->actived)
                                                         <form action="{{ route('users.deactivate', $user->id) }}" method="POST"
                                                             style="display: inline;">
@@ -54,7 +58,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="button button--danger">Borrar</button>
                                                     </form>
-                                                </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
