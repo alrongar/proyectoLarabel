@@ -19,7 +19,7 @@ class UserController extends Controller
         return view('admin.users', compact('users'));
     }
 
-    // Activar usuario
+    // Activar usuario (correo)
     public function activate($id)
     {
         $user = User::findOrFail($id);
@@ -36,6 +36,7 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Usuario activado y notificado.');
     }
+
 
     public function deactivate($id)
     {

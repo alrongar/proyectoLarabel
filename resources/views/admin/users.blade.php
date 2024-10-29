@@ -25,6 +25,8 @@
                                 <tr class="dashboard__table-row">
                                     <td class="dashboard__table-cell">
                                         <span>{{ $user->name }}</span>
+                                        <br>
+                                        <small>Estado: {{ $user->actived ? 'Activado' : 'Desactivado' }}</small>
                                     </td>
                                     <td class="dashboard__table-cell">
                                         <span>{{ $user->email }}</span>
@@ -37,7 +39,7 @@
                                                 <button type="submit" class="button button--warning">Desactivar</button>
                                             </form>
                                         @else
-                                            <form action="{{ route('users.activate', $user->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{route('users.activate', $user->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="button button--success">Activar</button>
