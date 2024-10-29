@@ -18,6 +18,9 @@
                         <h5 class="card-title">Hola, {{ $nombre }}</h5>
                         <p class="card-text">Tu cuenta ha sido activada por el administrador. Ya puedes iniciar sesión.</p>
                         <a href="{{ url('/login') }}" class="btn btn-primary">Iniciar Sesión</a>
+                        <div class="card-footer text-muted" style="background-color: #f8f9fa;">
+                            © 2024 Event App - All rights reserved
+                        </div>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,13 @@
         <p class="login-page__login-subtitle">
             ¡Bienvenido! Inicia sesión para obtener acceso a eventos exclusivos y guardarlos para después.
         </p>
+
+        @if (session('status'))
+            <div class="alert alert-success" role="alert" id="success-message">
+                {{ session('status') }}
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -41,13 +48,17 @@
                 @enderror
             </div>
 
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                <label class="form-check-label" for="remember">{{ __('Recuérdame') }}</label>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <label class="form-check-label" for="remember">
+                        {{ __('Recuérdame') }}
+                    </label>
+                </div>
             </div>
 
             <div class="mb-0">
-                <button type="submit" class="btn btn-primary login-form__button">
+                <button type="submit" class="btn btn-primary">
                     {{ __('Iniciar Sesión') }}
                 </button>
 
@@ -64,4 +75,19 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var successMessage = document.getElementById('success-message');
+        if (successMessage) {
+            setTimeout(function() {
+                successMessage.style.transition = 'opacity 1s';
+                successMessage.style.opacity = '0';
+                setTimeout(function() {
+                    successMessage.remove();
+                }, 1000);
+            }, 5000); // El mensaje desaparecerá después de 5 segundos
+        }
+    });
+</script>
 @endsection

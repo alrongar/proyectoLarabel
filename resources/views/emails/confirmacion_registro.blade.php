@@ -17,7 +17,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Hola, {{ $nombre }}</h5>
                         <p class="card-text">Gracias por registrarte. Por favor, confirma tu cuenta haciendo clic en el siguiente enlace:</p>
-                        <a href="{{ url('/confirmar-cuenta/'.$user->remember_token) }}" class="btn btn-primary">Confirmar Cuenta</a>
+                        <a href="{{ url(path: '/confirmar-cuenta/'.$user->remember_token) }}" class="btn btn-primary">Confirmar Cuenta</a>
+                        <div class="card-footer text-muted" style="background-color: #f8f9fa;">
+                            © 2024 Event App - All rights reserved
+                        </div>
                     </div>
                     <!-- <div class="card-footer text-muted">
                         © 2024 Event App - Todos los derechos reservados

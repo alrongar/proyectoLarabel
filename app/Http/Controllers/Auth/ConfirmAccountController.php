@@ -10,19 +10,19 @@ class ConfirmAccountController extends Controller
 {
     public function confirmarCuenta($token)
     {
-        $confirmation = DB::table('user_confirmations')->where('token', $token)->first();
+        // Buscar el usuario directamente por el remember_token
+        $user = User::where('remember_token', $token)->first();
 
-        if (!$confirmation) {
+        if (!$user) {
             return redirect()->route('login')->with('error', 'Token de confirmación inválido.');
         }
 
-        $user = User::find($confirmation->user_id);
+        // Actualizar los campos de verificación de correo
         $user->email_verified_at = now();
         $user->email_confirmed = 1;
+        $user->remember_token = null; // Opcional: eliminar el token de confirmación
         $user->save();
 
-        DB::table('user_confirmations')->where('token', $token)->delete();
-
-        return redirect()->route('login')->with('status', 'Correo confirmado. Esperando la activación por parte del administrador.');
+        return redirect()->route('login')->with('status', 'Correo confirmado exitosamente. Esperando la activación por parte del administrador.');
     }
 }

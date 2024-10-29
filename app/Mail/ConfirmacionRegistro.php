@@ -24,7 +24,7 @@ class ConfirmacionRegistro extends Mailable
         return $this->view('emails.confirmacion_registro')
                     ->with([
                         'nombre' => $this->user->name,
-                        'token' => $this->token,
+                        'user' => $this->user,
                     ]);
     }
 }
