@@ -1,112 +1,84 @@
-/* Estilos Generales del Panel de Administración */
-.admin {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    background-color: #f9f9f9; // Fondo claro para el panel de admin
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .admin__header {
+.dashboard__table {
     width: 100%;
-    background-color: #3366ff; // Fondo del encabezado
-    color: #ffffff; // Color del texto del encabezado
-    padding: 20px 0;
-    text-align: center;
-    border-radius: 10px 10px 0 0; // Bordes redondeados en la parte superior
-  
-    h1 {
-      margin: 0;
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 0.5px; // Espaciado entre letras
+    border-collapse: separate;
+    border-spacing: 0 8px; 
+    margin-top: 1rem;
+
+    &-header {
+        background-color: #00796b;
+        color: white;
     }
-  }
-  
-  /* Estilo de la Tarjeta del Dashboard */
-  .admin__card {
-    background-color: #ffffff; // Fondo de las tarjetas
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); // Sombra más pronunciada
-    border-radius: 10px;
-    padding: 25px;
-    width: 100%;
-    margin: 20px 0;
-    transition: transform 0.3s ease; // Efecto de elevación al pasar el mouse
-  
-    &:hover {
-      transform: translateY(-5px); // Eleva la tarjeta al pasar el mouse
+
+    &-heading {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-weight: bold;
     }
-  
-    &__title {
-      font-size: 22px;
-      font-weight: bold;
-      color: #333; // Color del título de la tarjeta
-      margin-bottom: 15px;
+
+    &-body {
+        .dashboard__table-row {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     }
-  
-    &__status {
-      margin: 10px 0;
-      font-weight: bold;
-      color: #ff9800; // Color del mensaje de estado
-    }
-  
-    &__table {
-      width: 100%;
-      border-collapse: collapse;
-  
-      thead {
-        background-color: #f0f0f0; // Color de fondo del encabezado de la tabla
+
+    &-cell {
+        padding: 0.75rem 1rem;
         color: #333;
-  
-        th {
-          padding: 15px;
-          text-align: left;
-          border-bottom: 1px solid #ccc; // Añadir borde inferior a las celdas del encabezado
-          font-weight: bold; // Negrita en el encabezado
+        font-size: 0.9rem;
+
+        &:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
         }
-      }
-  
-      tbody {
-        tr {
-          &:nth-child(even) {
-            background-color: #fafafa; // Alternar colores en filas
-          }
-  
-          &:hover {
-            background-color: #f0f9ff; // Color de fondo en hover
-          }
-  
-          td {
-            padding: 15px;
-            border-bottom: 1px solid #ccc; // Línea separadora entre filas
-            border-right: 1px solid #ccc; // Añadir borde derecho para separar columnas
-            font-size: 14px; // Tamaño de fuente
-  
-            &:last-child {
-              border-right: none; // Eliminar borde derecho en la última columna
-            }
-  
-            .button {
-              margin-right: 5px; // Espaciado entre botones
-              color: #ffffff; // Color del texto del botón
-              background-color: #3366ff; // Fondo del botón de acción
-              border: none;
-              border-radius: 4px;
-              padding: 10px 15px;
-              cursor: pointer;
-              text-decoration: none;
-              text-align: center;
-              transition: background-color 0.3s; // Transición suave en el hover
-  
-              &:hover {
-                background-color: darken(#3366ff, 10%); // Efecto hover
-              }
-            }
-          }
+
+        &:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
         }
-      }
     }
-  }
-  
+}
+
+// Botón general y variantes
+.button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+
+    &--primary {
+        background-color: #007bff;
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+
+    &--success {
+        background-color: #28a745;
+        &:hover {
+            background-color: #218838;
+        }
+    }
+
+    &--warning {
+        background-color: #ffc107;
+        color: #212529;
+        &:hover {
+            background-color: #e0a800;
+        }
+    }
+
+    &--danger {
+        background-color: #dc3545;
+        &:hover {
+            background-color: #c82333;
+        }
+    }
+}

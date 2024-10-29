@@ -17,7 +17,7 @@
 
     <!-- Scripts -->
     @vite(['resources/scss/nav-foot.scss','resources/scss/app.scss','resources/scss/-variables.scss',
-            'resources/scss/login.scss','resources/scss/admin.scss','resources/scss/register.scss',
+            'resources/scss/login.scss','resources/scss/register.scss','resources/scss/admin.scss',
             'resources/scss/update.scss'])
 
     <!-- Bootstrap CSS -->
