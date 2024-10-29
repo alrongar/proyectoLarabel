@@ -65,6 +65,7 @@ class RegisterController extends Controller
             $imagePath = $request->file('image')->store('images', 'public');
         }
 
+        //dd($request);
         // Crear el usuario
         $user = $this->create($request->all());
 
@@ -72,13 +73,14 @@ class RegisterController extends Controller
         $token = Str::random(60);
         $user->remember_token = $token;
         $user->save();
-
+        dd($user);
         // Enviar correo de confirmación
         Mail::to($user->email)->send(new ConfirmacionRegistro($user, $token));
 
         // Redirigir con mensaje de éxito
         return redirect()->route('home')->with('success', 'Usuario registrado con éxito! Te hemos enviado un correo de confirmación.');
     }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -88,14 +90,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'actived' => 0,
-            'role' => $data['rol'],
+            'rol' => $data['rol'],
             'email_confirmed' => 0,
             'remember_token' => Str::random(10),
+            
         ]);
     }
 }
