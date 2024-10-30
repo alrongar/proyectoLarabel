@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $token = Str::random(60);
         $user->remember_token = $token;
         $user->save();
-        dd($user);
+        
         // Enviar correo de confirmación
         Mail::to($user->email)->send(new ConfirmacionRegistro($user, $token));
 

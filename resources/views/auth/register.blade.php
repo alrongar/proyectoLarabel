@@ -11,7 +11,7 @@
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
 
-            @if ($errors->any())
+            <!--@if ($errors->any())
                 <div class="register-form__alert alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -19,7 +19,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif-->
 
             <div class="register-form__field row mb-3">
                 <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
