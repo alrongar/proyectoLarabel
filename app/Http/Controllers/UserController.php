@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    // Mostrar todos los usuarios desactivados
+    //(admin) Mostrar todos los usuarios desactivados
     public function index()
     {
         $users = User::where('deleted', 0)
@@ -19,7 +19,7 @@ class UserController extends Controller
         return view('admin.users', compact('users'));
     }
 
-    // Activar usuario (correo)
+    // (admin) Activar usuario (correo)
     public function activate($id)
     {
         $user = User::findOrFail($id);
@@ -37,7 +37,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Usuario activado y notificado.');
     }
 
-
+    // (admin) desactivar usuario
     public function deactivate($id)
     {
         $user = User::findOrFail($id);
@@ -46,6 +46,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Usuario desactivado.');
     }
 
+    // (admin) eliminar usuario
     public function destroy(User $user)
     {
         $user->deleted = 1;
@@ -53,15 +54,15 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Usuario eliminado.');
     }
 
+    //(admin) redirigis a la vista update
     public function edit($id)
     {
-        // Obtener el usuario por su ID o fallar si no existe
         $user = User::findOrFail($id);
-
         // Redirigir a la vista para actualizar el usuario
         return view('auth.update', compact('user'));
     }
 
+    // (admin) actualizar nombre del usuario seleccionado
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -74,4 +75,13 @@ class UserController extends Controller
 
         return redirect()->route('admin.users')->with('success', 'Nombre actualizado exitosamente.');
     }
+
+    
+    //retorna la vista de un usuario normal
+    public function dashboard()
+{
+    $userId = auth()->id();
+    return view('user.normalUser', compact('userId'));
+}
+
 }

@@ -18,7 +18,7 @@
     <!-- Scripts -->
     @vite(['resources/scss/nav-foot.scss','resources/scss/app.scss','resources/scss/-variables.scss',
             'resources/scss/login.scss','resources/scss/register.scss','resources/scss/admin.scss',
-            'resources/scss/update.scss'])
+            'resources/scss/update.scss','resources/scss/home.scss'])
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">

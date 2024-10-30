@@ -44,5 +44,8 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 // Confirmar cuenta con email
 Route::get('/confirmar-cuenta/{token}', [ConfirmAccountController::class, 'confirmarCuenta']);
 
+// Ruta para la pantalla de usuario
+Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard')->middleware('auth');
+
 //log out 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

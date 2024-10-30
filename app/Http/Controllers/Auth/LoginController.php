@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/user/dashboard';
 
     /**
      * Create a new controller instance.
@@ -47,14 +47,14 @@ class LoginController extends Controller
     if (Auth::attempt($credentials)) {
         // Verificar si el usuario está activado
         if (Auth::user()->actived == 0) {
-            Auth::logout(); // Cerrar la sesión inmediatamente
+            Auth::logout();
             return redirect()->back()->withErrors([
                 'email' => 'Tu cuenta aún no ha sido activada.',
             ]);
         }
 
         // Si el usuario está activado, redirige al dashboard
-        return redirect()->intended('home');
+        return redirect()->intended($this->redirectTo);
     }
 
     return back()->withErrors([
