@@ -28,10 +28,5 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function invalid($request, ValidationException $exception)
-{
-    return response()->json([
-        'errors' => $exception->errors(),
-    ], 422);
-}
+    
 }
