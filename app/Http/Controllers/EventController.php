@@ -39,7 +39,7 @@ class EventController extends Controller
 
         // Manejar la imagen si se proporciona
         if ($request->hasFile('image')) {
-            $event->image_path = $request->file('image')->store('images', 'public'); // Asegúrate de configurar el sistema de archivos correctamente
+            $event->image = $request->file('image')->store('images', 'public'); // Asegúrate de configurar el sistema de archivos correctamente
         }
 
         // Asociar el evento al usuario autenticado

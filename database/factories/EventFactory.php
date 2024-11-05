@@ -18,10 +18,10 @@ class EventFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'description' => fake()->description(),
-            'category' => fake()->randomElement(Category::cases())->value,
+            'description' => $this->faker->text(200),
+            'category' => $this->faker->randomElement(['Music', 'Sport', 'Tech']),
             'image'=>"",
-            
+            'user_id'=> \App\Models\User::factory(),
         ];
     }
 
