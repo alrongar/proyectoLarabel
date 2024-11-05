@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Category;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -41,7 +43,28 @@ class DatabaseSeeder extends Seeder
 
         ]);*/
 
-        Event::factory(10)->create();
+        /*$categories = [
+            [
+                'name' => 'Music',
+                'description' => 'All events related to music, concerts, and performances.',
+                'deleted' => 0,
+            ],
+            [
+                'name' => 'Sport',
+                'description' => 'Events that involve sports, competitions, and physical activities.',
+                'deleted' => 0,
+            ],
+            [
+                'name' => 'Tech',
+                'description' => 'Technology-related events, including workshops and conferences.',
+                'deleted' => 0,
+            ],
+        ];
+
+        
+        DB::table('categories')->insert($categories);*/
+
+        //Event::factory(10)->create();
 
         //User::factory(10)->create();
     }

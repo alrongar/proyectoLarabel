@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration {
     /**
      * Run the migrations.
@@ -15,7 +16,7 @@ return new class extends Migration {
             $table->bigInteger('organizer_id')->unsigned();
             $table->string('title');
             $table->text('description');
-            $table->enum('category', ['Music', 'Sport', 'Tech']);
+            $table->bigInteger('category_id')->unsigned();
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->string('location');
@@ -27,6 +28,7 @@ return new class extends Migration {
             $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
             $table->foreign('organizer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

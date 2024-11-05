@@ -3,8 +3,10 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use app\Models\Category;
-use app\Models\User;
+
+use App\Models\Category; // Asegúrate de que esta línea sea correcta
+use App\Models\User;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\evento>
  */
@@ -18,10 +20,10 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'organizer_id' => 13, 
+            'organizer_id' => 2, 
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'category' => $this->faker->randomElement(['Music', 'Sport', 'Tech']),
+            'category_id' => Category::factory(),
             'start_time' => $this->faker->dateTime,
             'end_time' => $this->faker->dateTime,
             'location' => $this->faker->address,

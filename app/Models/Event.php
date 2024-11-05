@@ -13,7 +13,7 @@ class Event extends Model
         'organizer_id',
         'title',
         'description',
-        'category',
+        'category_id',
         'start_time',
         'end_time',
         'location',
@@ -30,4 +30,8 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }
