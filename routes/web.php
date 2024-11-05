@@ -50,6 +50,6 @@ Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.
 //log out 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/organizer/create', [EventController::class, 'create'])->name('organizer.create');
+Route::get('/organizer/create', [EventController::class, 'create'])->name('organizer.create')->middleware('auth');
 Route::post('/organizer', [EventController::class, 'store'])->name('organizer.store'); 
 Route::get('/organizer', [EventController::class, 'index'])->name('organizer')->middleware('auth');
