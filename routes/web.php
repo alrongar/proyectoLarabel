@@ -53,3 +53,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/organizer/create', [EventController::class, 'create'])->name('organizer.create')->middleware('auth');
 Route::post('/organizer', [EventController::class, 'store'])->name('organizer.store'); 
 Route::get('/organizer', [EventController::class, 'index'])->name('organizer')->middleware('auth');
+
+Route::middleware(['auth', 'organizer'])->group(function () {
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('/events/category/{category}', [EventController::class, 'filterByCategory'])->name('events.filter');
+});

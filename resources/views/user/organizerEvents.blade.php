@@ -7,6 +7,16 @@
             <div class="dashboard__body">
                 <h1 class="dashboard__title">Tus Eventos</h1>
                 <a href="{{ route('organizer.create') }}" class="btn btn-primary">Crear evento</a>
+
+                <div class="menu mb-3">
+                    <ul>
+                        <li><a href="{{ route('events.index') }}">Todos</a></li>
+                        @foreach ($categories as $category)
+                            <li><a href="{{ route('events.filter', $category->name) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+
                 @if ($events->isEmpty())
                     <p>No has creado ningún evento.</p>
                 @else
@@ -30,9 +40,9 @@
                                     <td class="dashboard__table-cell">{{ $event->description }}</td>
                                     <td class="dashboard__table-cell">{{ $event->category->name }}</td>
                                     <td class="dashboard__table-cell">{{ $event->created_at->format('d/m/Y H:i') }}</td>
-                                    <td class="dashboard__table-cell"><img src="{{ asset($event->image) }}" alt="Imagen del evento" width="200" height="200"></td>
+                                    <td class="dashboard__table-cell"><img src="{{ asset($event->image_url) }}" alt="Imagen del evento" width="200" height="200"></td>
                                     <td class="dashboard__table-cell">
-
+                                        <!-- Aquí puedes agregar botones de acción como editar o eliminar -->
                                     </td>
                                 </tr>
                             @endforeach
@@ -41,8 +51,6 @@
                 @endif
             </div>
         </div>
-
     </div>
 </div>
-
 @endsection
