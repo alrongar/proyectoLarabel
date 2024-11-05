@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ConfirmAccountController;
-
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,3 +49,7 @@ Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.
 
 //log out 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/organizer/create', [EventController::class, 'create'])->name('organizer.create');
+Route::post('/organizer', [EventController::class, 'store'])->name('organizer.store'); 
+Route::get('/organizer', [EventController::class, 'index'])->name('organizer')->middleware('auth');

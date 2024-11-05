@@ -46,6 +46,11 @@
                                 <a href="{{ route('admin.users') }}" class="nav-link">{{ __('Admin Panel') }}</a>
                             </li>
                         @endif
+                        @if (Auth::check() && Auth::user()->rol === 'o')
+                            <li class="nav-item"> 
+                                <a href="{{ route('organizer') }}" class="nav-link">{{ __('My Events') }}</a>
+                            </li>
+                        @endif
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
