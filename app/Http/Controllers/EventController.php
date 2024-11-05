@@ -26,14 +26,14 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category' => 'required|in:Music,Sport,Tech',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $event = new Event();
-        $event->name = $request->name;
+        $event->title = $request->title;
         $event->description = $request->description;
         $event->category = $request->category;
 

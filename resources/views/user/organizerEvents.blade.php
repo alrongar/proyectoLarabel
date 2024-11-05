@@ -5,7 +5,7 @@
     <div class="dashboard">
         <div class="dashboard__card">
             <div class="dashboard__body">
-                <h3 class="dashboard__title">Tus Eventos</h3>
+                <h1 class="dashboard__title">Tus Eventos</h1>
                 <a href="{{ route('organizer.create') }}" class="btn btn-primary">Crear evento</a>
                 @if ($events->isEmpty())
                     <p>No has creado ningún evento.</p>
@@ -26,9 +26,9 @@
                             @foreach ($events as $event)
                                 <tr class="dashboard__table-row">
                                     <td class="dashboard__table-cell">{{ $event->id }}</td>
-                                    <td class="dashboard__table-cell">{{ $event->name }}</td>
+                                    <td class="dashboard__table-cell">{{ $event->title }}</td>
                                     <td class="dashboard__table-cell">{{ $event->description }}</td>
-                                    <td class="dashboard__table-cell">{{ $event->category }}</td>
+                                    <td class="dashboard__table-cell">{{ $event->category->name }}</td>
                                     <td class="dashboard__table-cell">{{ $event->created_at->format('d/m/Y H:i') }}</td>
                                     <td class="dashboard__table-cell"><img src="{{ asset($event->image) }}" alt="Imagen del evento" width="200" height="200"></td>
                                     <td class="dashboard__table-cell">
