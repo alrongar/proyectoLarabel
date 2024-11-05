@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     public function create()
     {
-        return view('event.createEvent');
+        $categories = Category::all();
+
+        return view('event.createEvent', compact('categories'));
     }
 
     public function index()
@@ -27,23 +30,38 @@ class EventController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'category' => 'required|in:Music,Sport,Tech',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'description' => 'nullable|string',
+            'category_id' => 'required|in:Music,Sport,Tech',
+            'start_time' => 'required|date|after:now',
+            'end_time' => 'required|date|after:start_time',
+            'location' => 'required|string|max:255', 
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+            'max_attendees' => 'required|integer|min:1',
+            'price' => 'nullable|numeric|min:0',
+            'image_url' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $event = new Event();
         $event->title = $request->title;
         $event->description = $request->description;
-        $event->category = $request->category;
+        $event->category_id = $request->category_id;
+        $event->start_time = $request->start_time;
+        $event->end_time = $request->end_time;
+        $event->location = $request->location;
+        $event->latitude = $request->latitude;
+        $event->longitude = $request->longitude;
+        $event->max_attendees = $request->max_attendees;
+        $event->price = $request->price;
+
 
         // Manejar la imagen si se proporciona
-        if ($request->hasFile('image')) {
-            $event->image = $request->file('image')->store('images', 'public'); // Asegúrate de configurar el sistema de archivos correctamente
+        if ($request->hasFile('image_url')) {
+            $event->image_url = $request->file('image_url')->store('images', 'public'); 
         }
 
         // Asociar el evento al usuario autenticado
-        $event->user_id = Auth::id();
+        $event->organizer_id = Auth::id();
 
         $event->save();
 

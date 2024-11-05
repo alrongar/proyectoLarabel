@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        /*User::factory()->create([
+        User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password'=> bcrypt('12345678'),
@@ -31,8 +31,8 @@ class DatabaseSeeder extends Seeder
             'email_confirmed' => 1,
             'image'=>""
 
-        ]);*/
-        /*User::factory()->create([
+        ]);
+        User::factory()->create([
             'name' => 'org',
             'email' => 'org@gmail.com',
             'password'=> bcrypt('12345678'),
@@ -41,9 +41,9 @@ class DatabaseSeeder extends Seeder
             'email_confirmed' => 1,
             'image'=>""
 
-        ]);*/
+        ]);
 
-        /*$categories = [
+        $categories = [
             [
                 'name' => 'Music',
                 'description' => 'All events related to music, concerts, and performances.',
@@ -62,10 +62,10 @@ class DatabaseSeeder extends Seeder
         ];
 
         
-        DB::table('categories')->insert($categories);*/
+        DB::table('categories')->insert($categories);
 
-        //Event::factory(10)->create();
+        Event::factory(10)->create();
 
-        //User::factory(10)->create();
+        User::factory(10)->create();
     }
 }

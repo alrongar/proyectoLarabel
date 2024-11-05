@@ -23,7 +23,7 @@ class EventFactory extends Factory
             'organizer_id' => 2, 
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'category_id' => Category::factory(),
+            'category_id' => Category::inRandomOrder()->first()->id,
             'start_time' => $this->faker->dateTime,
             'end_time' => $this->faker->dateTime,
             'location' => $this->faker->address,
