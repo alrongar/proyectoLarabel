@@ -30,9 +30,19 @@ class DatabaseSeeder extends Seeder
             'image'=>""
 
         ]);*/
+        /*User::factory()->create([
+            'name' => 'org',
+            'email' => 'org@gmail.com',
+            'password'=> bcrypt('12345678'),
+            'rol' => 'o',
+            'actived' => 1,
+            'email_confirmed' => 1,
+            'image'=>""
 
-        Event::factory()->count(5)->create();
+        ]);*/
 
-        User::factory(10)->create();
+        //Event::factory()->count(5)->create();
+
+        //User::factory(10)->create();
     }
 }
