@@ -18,7 +18,7 @@ class EventController extends Controller
         if ($user->rol !== 'o') {
             return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
         }
-        $events = Event::where('user_id', $user->id)->get(); // Obtener todos los eventos
+        $events = Event::where('organizer_id', $user->id)->get(); // Obtener todos los eventos
         return view('user.organizerEvents', compact('events')); // Asegúrate de que la vista exista
     }
 

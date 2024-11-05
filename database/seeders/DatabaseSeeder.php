@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         ]);*/
 
-        //Event::factory()->count(5)->create();
+        Event::factory(10)->create();
 
         //User::factory(10)->create();
     }

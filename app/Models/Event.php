@@ -10,10 +10,24 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
-        'description', 
-        'category', 
-        'image',
-        'userId'
+        'organizer_id',
+        'title',
+        'description',
+        'category',
+        'start_time',
+        'end_time',
+        'location',
+        'latitude',
+        'longitude',
+        'max_attendees',
+        'price',
+        'image_url',
     ];
+
+    // Define la relación con el modelo Organizer
+    public function organizer()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

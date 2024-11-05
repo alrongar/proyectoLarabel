@@ -11,13 +11,22 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id()->unsigned();
+            $table->bigInteger('organizer_id')->unsigned();
+            $table->string('title');
             $table->text('description');
             $table->enum('category', ['Music', 'Sport', 'Tech']);
-            $table->string('image')->nullable();
-            $table->foreignId('user_id')->constrained();
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
+            $table->string('location');
+            $table->decimal('latitude', 9,6);
+            $table->decimal('longitude', 9,6);
+            $table->integer('max_attendees');
+            $table->decimal('price', 10, 2);
+            $table->string('image_url')->nullable();
+            $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
+            $table->foreign('organizer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
