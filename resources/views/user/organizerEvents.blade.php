@@ -40,7 +40,7 @@
                                     <td class="dashboard__table-cell">{{ $event->description }}</td>
                                     <td class="dashboard__table-cell">{{ $event->category->name }}</td>
                                     <td class="dashboard__table-cell">{{ $event->created_at->format('d/m/Y H:i') }}</td>
-                                    <td class="dashboard__table-cell"><img src="{{ asset($event->image) }}"
+                                    <td class="dashboard__table-cell"><img src="{{ asset('storage/'.$event->image_url) }}"
                                             alt="Imagen del evento" width="200" height="200"></td>
                                     <td class="dashboard__table-cell">
                                         <!-- Botón de Editar -->
