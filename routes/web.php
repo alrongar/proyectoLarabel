@@ -53,3 +53,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/organizer/create', [EventController::class, 'create'])->name('organizer.create')->middleware('auth');
 Route::post('/organizer', [EventController::class, 'store'])->name('organizer.store'); 
 Route::get('/organizer', [EventController::class, 'index'])->name('organizer')->middleware('auth');
+
+Route::get('/organizer/{id}/edit', [EventController::class, 'edit'])->name('organizer.edit');
+Route::put('/organizer/{id}', [EventController::class, 'update'])->name('organizer.update');
+Route::delete('/organizer/{id}', [EventController::class, 'delete'])->name('organizer.delete'); 

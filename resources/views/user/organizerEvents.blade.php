@@ -30,9 +30,20 @@
                                     <td class="dashboard__table-cell">{{ $event->description }}</td>
                                     <td class="dashboard__table-cell">{{ $event->category->name }}</td>
                                     <td class="dashboard__table-cell">{{ $event->created_at->format('d/m/Y H:i') }}</td>
-                                    <td class="dashboard__table-cell"><img src="{{ asset($event->image) }}" alt="Imagen del evento" width="200" height="200"></td>
+                                    <td class="dashboard__table-cell"><img src="{{ asset($event->image) }}"
+                                            alt="Imagen del evento" width="200" height="200"></td>
                                     <td class="dashboard__table-cell">
+                                        <!-- Botón de Editar -->
+                                        <a href="{{ route('organizer.edit', $event->id) }}" class="btn btn-warning">Editar</a>
 
+                                        <!-- Botón de Borrar -->
+                                        <form action="{{ route('organizer.delete', $event->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('¿Estás seguro de que deseas eliminar este evento?')">Borrar</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

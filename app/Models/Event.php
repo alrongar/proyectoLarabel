@@ -24,6 +24,9 @@ class Event extends Model
         'image_url',
     ];
 
+    protected $dates = ['created_at', 'updated_at', 'start_time', 'end_time'];
+
+
     // Define la relación con el modelo Organizer
     public function organizer()
     {
