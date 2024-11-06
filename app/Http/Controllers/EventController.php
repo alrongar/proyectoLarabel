@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+
 class EventController extends Controller
 {
     public function create()
     {
         $categories = Category::all();
-
         return view('event.createEvent', compact('categories'));
     }
 
@@ -43,9 +43,24 @@ class EventController extends Controller
             return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
         }
         $events = Event::where('organizer_id', $user->id)->get(); // Obtener todos los eventos
-        return view('user.organizerEvents', compact('events')); // Asegúrate de que la vista exista
+        $categories = Category::all(); // Obtener todas las categorías
+        return view('user.organizerEvents', compact('events', 'categories')); // Asegúrate de que la vista exista
     }
 
+    public function filterByCategory($category)
+    {
+        $user = Auth::user();
+        if ($user->rol !== 'o') {
+            return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
+        }
+        $events = Event::where('organizer_id', $user->id)
+                        ->whereHas('category', function($query) use ($category) {
+                            $query->where('name', $category);
+                        })
+                        ->get();
+        $categories = Category::all();
+        return view('user.organizerEvents', compact('events', 'categories'));
+    }
 
     public function store(Request $request)
     {
@@ -75,7 +90,6 @@ class EventController extends Controller
         $event->max_attendees = $request->max_attendees;
         $event->price = $request->price;
 
-
         // Manejar la imagen si se proporciona
         if ($request->hasFile('image_url')) {
             $event->image_url = $request->file('image_url')->store('images', 'public');
@@ -83,7 +97,6 @@ class EventController extends Controller
 
         // Asociar el evento al usuario autenticado
         $event->organizer_id = Auth::id();
-
         $event->save();
 
         return redirect()->route('organizer')->with('success', 'Evento creado exitosamente');

@@ -6,6 +6,16 @@
         <div class="dashboard__card">
             <div class="dashboard__body">
                 <h1 class="dashboard__title">Tus Eventos</h1>
+
+                <div class="menu mb-3">
+                    <ul>
+                        <li><a href="{{ route('events.index') }}">Todos</a></li>
+                        @foreach ($categories as $category)
+                            <li><a href="{{ route('events.filter', $category->name) }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+
                 <a href="{{ route('organizer.create') }}" class="btn btn-primary">Crear evento</a>
                 @if ($events->isEmpty())
                     <p>No has creado ningún evento.</p>
