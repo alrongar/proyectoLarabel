@@ -10,7 +10,7 @@
                 <div class="menu mb-3">
                     <ul>
                         <li>
-                            <a href="#">Eventos</a>
+                            <a href="all">Eventos</a>
                             <ul>
                                 <li><a href="{{ route('events.filter', 'Music') }}">Música</a></li>
                                 <li><a href="{{ route('events.filter', 'Sport') }}">Deporte</a></li>

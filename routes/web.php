@@ -60,7 +60,7 @@ Route::put('/organizer/{id}', [EventController::class, 'update'])->name('organiz
 Route::delete('/organizer/{id}', [EventController::class, 'delete'])->name('organizer.delete');
 
 // Filtrado de eventos por categoría
-Route::middleware(['auth', 'role:organizer'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/category/{category}', [EventController::class, 'filterByCategory'])->name('events.filter');
 });

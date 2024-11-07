@@ -80,19 +80,18 @@ class EventController extends Controller
         return view('user.organizerEvents', compact('events', 'categories')); // Asegúrate de que la vista exista
     }
 
-    public function filterByCategory($category)
+    public function filterByCategory(string $categoryName)
     {
         $user = Auth::user();
         if ($user->rol !== 'o') {
             return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
         }
-        $events = Event::where('organizer_id', $user->id)
-                        ->whereHas('category', function($query) use ($category) {
-                            $query->where('name', $category);
-                        })
-                        ->get();
-        $categories = Category::all();
-        return view('user.organizerEvents', compact('events', 'categories'));
+        if ($categoryName === 'all') {
+            return redirect()->route('organizer');
+        }
+        $category = Category::where('name', $categoryName)->firstOrFail();
+        $events = Event::where('category_id', $category->id)->get();
+        return view('user.organizerEvents', compact('events', 'category'));
     }
 
     public function store(Request $request)
