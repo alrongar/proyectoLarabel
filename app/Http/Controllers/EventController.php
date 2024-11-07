@@ -24,10 +24,7 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $event = Event::findOrFail($id);
-
-
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -53,13 +50,15 @@ class EventController extends Controller
         $event->max_attendees = $request->max_attendees;
         $event->price = $request->price;
 
+        // Manejar la imagen si se proporciona
         if ($request->hasFile('image_url')) {
             $event->image_url = $request->file('image_url')->store('storage/images', 'public');
-            
         }
 
-        
+        // Asociar el evento al usuario autenticado
+        $event->organizer_id = Auth::id();
         $event->save();
+
         return redirect()->route('organizer')->with('success', 'Evento actualizado con éxito');
     }
 
@@ -76,7 +75,7 @@ class EventController extends Controller
         if ($user->rol !== 'o') {
             return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
         }
-        $events = Event::where('organizer_id', $user->id)->get(); // Obtener todos los eventos
+        $events = Event::where('organizer_id', $user->id)->get(); // Obtener solo los eventos del organizador
         $categories = Category::all(); // Obtener todas las categorías
         return view('user.organizerEvents', compact('events', 'categories')); // Asegúrate de que la vista exista
     }
@@ -127,13 +126,12 @@ class EventController extends Controller
         // Manejar la imagen si se proporciona
         if ($request->hasFile('image_url')) {
             $event->image_url = $request->file('image_url')->store('storage/images', 'public');
-            
         }
 
         // Asociar el evento al usuario autenticado
         $event->organizer_id = Auth::id();
         $event->save();
 
-        return redirect()->route('organizer')->with('success', 'Evento creado exitosamente');
+        return redirect()->route('organizer.create')->with('success', 'Evento creado exitosamente');
     }
 }

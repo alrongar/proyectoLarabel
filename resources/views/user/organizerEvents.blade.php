@@ -9,10 +9,14 @@
 
                 <div class="menu mb-3">
                     <ul>
-                        <li><a href="{{ route('events.index') }}">Todos</a></li>
-                        @foreach ($categories as $category)
-                            <li><a href="{{ route('events.filter', $category->name) }}">{{ $category->name }}</a></li>
-                        @endforeach
+                        <li>
+                            <a href="#">Eventos</a>
+                            <ul>
+                                <li><a href="{{ route('events.filter', 'Music') }}">Música</a></li>
+                                <li><a href="{{ route('events.filter', 'Sport') }}">Deporte</a></li>
+                                <li><a href="{{ route('events.filter', 'Tech') }}">Tecnología</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 

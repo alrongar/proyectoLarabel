@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ConfirmAccountController;
 use App\Http\Controllers\EventController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,18 +48,19 @@ Route::get('/confirmar-cuenta/{token}', [ConfirmAccountController::class, 'confi
 // Ruta para la pantalla de usuario
 Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard')->middleware('auth');
 
-//log out 
+// Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// EventController - Organizer
 Route::get('/organizer/create', [EventController::class, 'create'])->name('organizer.create')->middleware('auth');
 Route::post('/organizer', [EventController::class, 'store'])->name('organizer.store');
 Route::get('/organizer', [EventController::class, 'index'])->name('organizer')->middleware('auth');
-
 Route::get('/organizer/{id}/edit', [EventController::class, 'edit'])->name('organizer.edit');
 Route::put('/organizer/{id}', [EventController::class, 'update'])->name('organizer.update');
 Route::delete('/organizer/{id}', [EventController::class, 'delete'])->name('organizer.delete');
 
-Route::middleware(['auth', 'User'])->group(function () {
+// Filtrado de eventos por categoría
+Route::middleware(['auth', 'role:organizer'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/category/{category}', [EventController::class, 'filterByCategory'])->name('events.filter');
 });
