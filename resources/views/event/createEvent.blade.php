@@ -69,19 +69,21 @@
 
             <!-- Latitud -->
             <div class="event-form__field row mb-3">
-            <div class="col-md-6">
-                <label for="latitude" class="form-label">Latitud</label>
-                <input type="text" name="latitude" id="latitude" class="form-control" value="{{ old('latitude') }}" required>
-            </div>
-            <div class="col-md-6">
-                <label for="longitude" class="form-label">Longitud</label>
-                <input type="text" name="longitude" id="longitude" class="form-control" value="{{ old('longitude') }}" required>
-            </div>
+                <div class="col-md-6">
+                    <label for="latitude" class="form-label">Latitud</label>
+                    <input type="text" name="latitude" id="latitude" class="form-control" value="{{ old('latitude') }}"
+                        required>
+                </div>
+                <div class="col-md-6">
+                    <label for="longitude" class="form-label">Longitud</label>
+                    <input type="text" name="longitude" id="longitude" class="form-control"
+                        value="{{ old('longitude') }}" required>
+                </div>
 
             </div>
 
             <!-- Longitud -->
-            
+
 
             <!-- Máximo de Asistentes -->
             <div class="event-form__field row mb-3">
@@ -141,8 +143,9 @@
 
             <!-- Botón de Envío -->
             <div class="event-form__footer row mb-0">
-                <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="event-form__button btn btn-primary">
+                <!-- Botón de Envío -->
+                <div class="event-form__footer">
+                    <button type="submit" class="event-form__button">
                         {{ __('Crear Evento') }}
                     </button>
                 </div>

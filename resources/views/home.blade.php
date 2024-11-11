@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card home">
-                <div class="home__header card-header">{{ __('Bienvenido a Eventify') }}</div>
+            <div class="card home border-0"> 
+                <div class="home__header card-header border-0">{{ __('Bienvenido a Eventify') }}</div>
                 
                 <div class="home__body card-body">
                     <p class="home__description">
@@ -24,7 +24,7 @@
                         {{ __('¡Únete a nuestra comunidad hoy y comienza a explorar lo que tu ciudad tiene para ofrecer!') }}
                     </p>
 
-                    <div class="home__buttons mt-4 row">
+                    <div class="home__buttons mt-4 row d-flex align-items-stretch">
                         <div class="col-md-6">
                             <a href="{{ route('login') }}" class="btn btn-primary w-100">
                                 {{ __('Iniciar Sesión') }}

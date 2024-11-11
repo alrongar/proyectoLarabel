@@ -33,22 +33,26 @@
                                     </td>
                                     <td class="dashboard__table-cell">
                                         @if($user->actived)
-                                            <form action="{{ route('users.deactivate', $user->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('users.deactivate', $user->id) }}" method="POST"
+                                                style="display: inline;">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="button button--warning">Desactivar</button>
                                             </form>
                                         @else
-                                            <form action="{{route('users.activate', $user->id) }}" method="POST" style="display: inline;">
+                                            <form action="{{route('users.activate', $user->id) }}" method="POST"
+                                                style="display: inline;">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="button button--success">Activar</button>
                                             </form>
                                         @endif
 
-                                        <a href="{{ route('profile.edit', $user->id) }}" class="button button--primary">Editar</a>
+                                        <a href="{{ route('profile.edit', $user->id) }}"
+                                            class="button button--primary">Editar</a>
 
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                            style="display: inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="button button--danger">Borrar</button>
@@ -58,7 +62,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>

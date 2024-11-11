@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,10 +16,21 @@
 
     @yield("css")
 
-    <!-- Scripts -->
-    @vite(['resources/scss/nav-foot.scss','resources/scss/app.scss','resources/scss/-variables.scss',
-            'resources/scss/login.scss','resources/scss/register.scss','resources/scss/admin.scss',
-            'resources/scss/update.scss','resources/scss/home.scss'])
+    @vite([
+    'resources/scss/global/app.scss',
+    'resources/scss/global/variables.scss',
+    'resources/scss/global/nav_foot.scss',
+    'resources/scss/global/home.scss',
+    'resources/scss/global/login.scss',
+    'resources/scss/global/register.scss',
+    'resources/scss/admin/admin.scss',
+    'resources/scss/admin/updateUser.scss',
+    'resources/scss/event/eventsList.scss',
+    'resources/scss/event/eventCreate.scss',
+    'resources/scss/event/eventsUpdate.scss',
+])
+
+
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -27,14 +39,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <div id="app" class="app">
-        <nav class="app__navbar navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="app__navbar navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="app__navbar-brand navbar-brand" href="{{ url('/') }}">
-                    Eventify  <!-- Cambiado de Laravel a Eventify -->
+                <a class="app__navbar-brand navbar-brand " href="{{ url('/') }}"
+                    style="font-size: 1.6rem; transition: color 0.3s ; color: white; "
+                    onmouseover="this.style.color='#ffc300'" onmouseout="this.style.color='white'">
+                    Eventify <!-- Cambiado de Laravel a Eventify -->
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -42,12 +61,12 @@
 
                     <ul class="navbar-nav ms-auto">
                         @if (Auth::check() && Auth::user()->rol === 'a')
-                            <li class="nav-item"> 
+                            <li class="nav-item">
                                 <a href="{{ route('admin.users') }}" class="nav-link">{{ __('Admin Panel') }}</a>
                             </li>
                         @endif
                         @if (Auth::check() && Auth::user()->rol === 'o')
-                            <li class="nav-item"> 
+                            <li class="nav-item">
                                 <a href="{{ route('organizer') }}" class="nav-link">{{ __('My Events') }}</a>
                             </li>
                         @endif
@@ -64,13 +83,17 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('profile.edit', Auth::user()->id) }}">{{ __('Edit Profile') }}</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('profile.edit', Auth::user()->id) }}">{{ __('Edit Profile') }}</a>
+                                    </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
@@ -98,4 +121,5 @@
         </footer>
     </div>
 </body>
+
 </html>
