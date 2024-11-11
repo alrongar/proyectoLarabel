@@ -86,7 +86,7 @@ class EventController extends Controller
         if ($user->rol !== 'o') {
             return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
         }
-        if ($categoryName === 'all') {
+        if ($categoryName === 'All') {
             return redirect()->route('organizer');
         }
         $category = Category::where('name', $categoryName)->firstOrFail();

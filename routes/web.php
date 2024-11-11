@@ -19,6 +19,9 @@ use App\Http\Controllers\EventController;
 */
 
 Route::get('/', function () {
+    if(Auth::check()){
+        return app(UserController::class)->dashboard();
+    }
     return view('home');
 });
 
