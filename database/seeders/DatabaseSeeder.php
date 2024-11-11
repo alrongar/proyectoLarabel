@@ -2,12 +2,16 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\Payment;
+use App\Models\Notification;
+use App\Models\EventAttendee;
+use App\Models\Review;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,13 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
@@ -30,7 +27,6 @@ class DatabaseSeeder extends Seeder
             'actived' => 1,
             'email_confirmed' => 1,
             'image'=>""
-
         ]);
         User::factory()->create([
             'name' => 'org',
@@ -40,7 +36,6 @@ class DatabaseSeeder extends Seeder
             'actived' => 1,
             'email_confirmed' => 1,
             'image'=>""
-
         ]);
 
         $categories = [
@@ -61,11 +56,12 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        
         DB::table('categories')->insert($categories);
-
         Event::factory(10)->create();
-
         User::factory(10)->create();
+        Payment::factory(10)->create();
+        Notification::factory(10)->create();
+        EventAttendee::factory(10)->create();
+        Review::factory(10)->create();
     }
 }
