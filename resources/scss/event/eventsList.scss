@@ -4,20 +4,63 @@
     width: 90%;
     margin: 0 auto;
 
+    .col-md-4 {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-left: 0.5rem;
+        margin-top: 10px;
+    
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            display: inline-block;
+            text-align: center;
+            transition: background-color 0.3s ease;
+
+            &-warning {
+                background-color: #ffc107;
+                color: #16213e;
+                &:hover {
+                    background-color: lighten(#ffc107, 10%);
+                }
+            }
+
+            &-danger {
+                background-color: #dc3545;
+                color: white;
+                &:hover {
+                    background-color: lighten(#dc3545, 10%);
+                }
+            }
+        }
+    
+    }
+
     &__card {
         .card {
             width: 100%;
-            max-width: 330px;
-            height: auto;
+            height: 250px;
+            
             border: 1px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             transition: box-shadow 0.3s ease, transform 0.3s ease;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             margin-left: auto;
             margin-right: auto;
             background-color: #ffffff;
+            padding: 1rem;
+            display: flex;
+            flex-direction: row;
 
             &:hover {
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -25,8 +68,8 @@
             }
 
             .card-img-top {
-                width: 100%;
-                height: 200px;
+                width: 50%;
+                height: 100%;
                 object-fit: cover;
             }
 
@@ -37,6 +80,7 @@
                     font-size: 1.35rem;
                     font-weight: bold;
                     color: #0f3460;
+                    
                 }
 
                 .card-text {
@@ -50,31 +94,7 @@
                     font-size: 0.9rem;
                 }
 
-                .btn {
-                    padding: 0.6rem 1.2rem;
-                    border-radius: 25px;
-                    font-size: 0.9rem;
-                    margin-top: 0.75rem;
-                    display: inline-block;
-                    text-align: center;
-                    transition: background-color 0.3s ease;
-
-                    &-warning {
-                        background-color: #ffc107;
-                        color: #16213e;
-                        &:hover {
-                            background-color: lighten(#ffc107, 10%);
-                        }
-                    }
-
-                    &-danger {
-                        background-color: #dc3545;
-                        color: white;
-                        &:hover {
-                            background-color: lighten(#dc3545, 10%);
-                        }
-                    }
-                }
+                
             }
         }
     }
@@ -124,10 +144,10 @@
     .row {
         width: 100%;
         display: flex;
-        gap: 1.5rem;
+        gap: 0rem;
         justify-content: space-evenly;
         flex-wrap: wrap;
-        margin-top: 1.5rem;
+        margin-top: 1rem;
     }
 
     .create-event-container {
