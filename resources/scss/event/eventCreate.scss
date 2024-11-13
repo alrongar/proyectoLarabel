@@ -1,35 +1,42 @@
 @import '../global/variables.scss';
 
-/* Estilo del Contenedor de Crear Evento */
 .event-page {
-    background-color: $background-color_1; /* Fondo blanco */
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 20px;
+    background-color: $background-color_1;
 }
 
-/* Contenedor del Formulario */
 .event-form {
-    background-color: $background-color_3; /* Fondo azul */
+    background-color: $background-color_3;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1300px;
     border-radius: 10px;
-    padding: 40px;
+    padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+   
 
-    /* Título del Formulario */
     &__title {
         font-size: 2rem;
-        color: $button-hover-background-color; /* Amarillo */
+        color: $button-hover-background-color;
         font-weight: bold;
         text-align: center;
         margin-bottom: 20px;
         text-transform: uppercase;
     }
 
-    /* Campos del Formulario */
+    &__container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    &__column {
+        flex: 1;
+        min-width: 300px;
+    }
+
     &__field {
         margin-bottom: 20px;
 
@@ -37,18 +44,19 @@
             display: block;
             font-size: 14px;
             font-weight: bold;
-            color: $button-hover-background-color; /* Amarillo */
+            color: $button-hover-background-color;
             margin-bottom: 5px;
             text-transform: uppercase;
+            
         }
 
         .form-control {
             width: 100%;
             padding: 12px;
             font-size: 15px;
-            color: black; /* Texto en azul */
-            background-color: $background-color_1; /* Fondo blanco en los campos */
-            border: 1px solid $button-hover-background-color; /* Borde amarillo */
+            color: black;
+            background-color: $background-color_1;
+            border: 1px solid $button-hover-background-color;
             border-radius: 8px;
             transition: border-color 0.3s ease;
 
@@ -58,20 +66,33 @@
             }
 
             &::placeholder {
-                color: $button-hover-background-color; /* Placeholder en amarillo */
+                color: $button-hover-background-color;
             }
+        }
+        textarea.form-control {
+            min-height: 140px; 
+            resize: vertical; 
         }
     }
 
-    /* Botón de Envío */
-    &__button {
+    &__image {
+        grid-column: span 2;
         width: 100%;
-        max-width: 300px; /* Ajusta el ancho máximo del botón */
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    &__button {
+        width: 20%;
         padding: 15px;
         font-size: 16px;
-        color: $background-color_3; /* Texto en azul */
-        background-color: $background-color_1; /* Fondo blanco */
-        border: 2px solid $button-hover-background-color; /* Borde amarillo */
+        color: $background-color_3;
+        background-color: $background-color_1;
+        border: 2px solid $button-hover-background-color;
         border-radius: 8px;
         font-weight: bold;
         cursor: pointer;
@@ -79,8 +100,8 @@
         text-transform: uppercase;
 
         &:hover {
-            background-color: $button-hover-background-color; /* Fondo amarillo */
-            color: $background-color_1; /* Texto blanco */
+            background-color: $button-hover-background-color;
+            color: $background-color_1;
         }
 
         &:focus {
@@ -88,27 +109,9 @@
         }
     }
 
-    /* Pie de Página del Formulario */
-    &__footer {
-        display: flex;
-        justify-content: center; /* Centra el botón horizontalmente */
-        margin-top: 20px;
-    }
-
-    /* Mensajes de Error */
     .text-danger {
         font-size: 14px;
         color: $color_4;
         margin-top: 5px;
-    }
-
-    /* Enlace de Pie de Página */
-    &__link {
-        color: $button-hover-background-color; /* Amarillo */
-        text-decoration: none;
-
-        &:hover {
-            text-decoration: underline;
-        }
     }
 }
