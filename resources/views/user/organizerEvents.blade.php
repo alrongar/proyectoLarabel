@@ -6,16 +6,6 @@
             <div class="dashboard__body">
                 <h1 class="dashboard__title">Tus Eventos</h1>
 
-                <!-- Contenedor de filtros -->
-                <div class="filters-container mb-4">
-                    <div class="event-filters">
-                        <a href="{{ route('events.filter', 'All') }}" class="filter">Todos</a>
-                        <a href="{{ route('events.filter', 'Music') }}" class="filter">Música</a>
-                        <a href="{{ route('events.filter', 'Sport') }}" class="filter">Deporte</a>
-                        <a href="{{ route('events.filter', 'Tech') }}" class="filter">Tecnología</a>
-                    </div>
-                </div>
-
                 @if ($events->isEmpty())
                     <p>No has creado ningún evento.</p>
                 @else

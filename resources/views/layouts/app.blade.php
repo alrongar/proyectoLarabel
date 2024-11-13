@@ -28,6 +28,7 @@
     'resources/scss/event/eventsList.scss',
     'resources/scss/event/eventCreate.scss',
     'resources/scss/event/eventsUpdate.scss',
+    'resources/scss/global/menu.scss',
 ])
 
 
@@ -66,9 +67,18 @@
                             </li>
                         @endif
                         @if (Auth::check() && Auth::user()->rol === 'o')
-                            <li class="nav-item">
-                                <a href="{{ route('organizer') }}" class="nav-link">{{ __('My Events') }}</a>
-                            </li>
+                        <div class="nav-link dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="{{ route('events.index')}}" id="bot" aria-expanded="false">
+                                        {{ __('Eventos') }}
+                                    </a>
+                                    <!-- Submenú para filtrar eventos -->
+                                    <ul class="dropdown-menu">
+                                        
+                                        <li><a class="dropdown-item" href="{{ route('events.filter', ['category' => 'music']) }}">Música</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('events.filter', ['category' => 'sport']) }}">Deporte</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('events.filter', ['category' => 'tech']) }}">Tecnología</a></li>
+                                    </ul>
+                        </div>
                         @endif
                         @guest
                             @if (Route::has('login'))
