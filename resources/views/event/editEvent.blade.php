@@ -63,12 +63,12 @@
 
                 <!-- Segunda Columna -->
                 <div class="event-form__column">
-                    <!-- Campo de Fecha de Fin -->
+                    <!-- Campo de Máximo de Asistentes -->
                     <div class="event-form__field">
-                        <label for="end_time">Fecha de Fin</label>
-                        <input type="datetime-local" id="end_time" name="end_time" class="form-control"
-                            value="{{ old('end_time', $event->end_time) }}" required>
-                        @error('end_time')
+                        <label for="max_attendees">Máximo de Asistentes</label>
+                        <input type="number" id="max_attendees" name="max_attendees" class="form-control"
+                            value="{{ old('max_attendees', $event->max_attendees) }}" required>
+                        @error('max_attendees')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -87,15 +87,17 @@
                             value="{{ old('longitude', $event->longitude) }}" required>
                     </div>
 
-                    <!-- Campo de Máximo de Asistentes -->
+                    <!-- Campo de Fecha de Fin -->
                     <div class="event-form__field">
-                        <label for="max_attendees">Máximo de Asistentes</label>
-                        <input type="number" id="max_attendees" name="max_attendees" class="form-control"
-                            value="{{ old('max_attendees', $event->max_attendees) }}" required>
-                        @error('max_attendees')
+                        <label for="end_time">Fecha de Fin</label>
+                        <input type="datetime-local" id="end_time" name="end_time" class="form-control"
+                            value="{{ old('end_time', $event->end_time) }}" required>
+                        @error('end_time')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+
+                    
 
                     <!-- Campo de Categoría -->
                     <div class="event-form__field">

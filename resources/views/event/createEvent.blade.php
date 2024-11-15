@@ -57,11 +57,12 @@
 
                 <!-- Segunda Columna -->
                 <div class="event-form__column">
+
                     <div class="event-form__field">
-                        <label for="end_time">Fecha de Fin</label>
-                        <input type="datetime-local" id="end_time" name="end_time" class="form-control"
-                            value="{{ old('end_time') }}" required>
-                        @error('end_time')
+                        <label for="max_attendees">Máximo de Asistentes</label>
+                        <input type="number" id="max_attendees" name="max_attendees" class="form-control"
+                            value="{{ old('max_attendees') }}" required>
+                        @error('max_attendees')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -79,13 +80,15 @@
                     </div>
 
                     <div class="event-form__field">
-                        <label for="max_attendees">Máximo de Asistentes</label>
-                        <input type="number" id="max_attendees" name="max_attendees" class="form-control"
-                            value="{{ old('max_attendees') }}" required>
-                        @error('max_attendees')
+                        <label for="end_time">Fecha de Fin</label>
+                        <input type="datetime-local" id="end_time" name="end_time" class="form-control"
+                            value="{{ old('end_time') }}" required>
+                        @error('end_time')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+
+
 
                     <div class="event-form__field">
                         <label for="category_id">Categoría</label>

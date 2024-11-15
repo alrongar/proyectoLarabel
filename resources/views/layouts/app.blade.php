@@ -122,10 +122,10 @@
 
         <footer class="app__footer">
             <div class="app__footer-content container">
-                <p class="app__footer-text">{{ __('© 2024 Event App - All rights reserved') }}</p>
+                <p class="app__footer-text">{{ __() }}</p>
                 <div class="app__footer-links">
-                    <a href="#" class="app__footer-link">{{ __('Privacy Policy') }}</a>
-                    <a href="#" class="app__footer-link">{{ __('Terms of Service') }}</a>
+                    <a href="#" class="app__footer-link">{{ __() }}</a>
+                    <a href="#" class="app__footer-link">{{ __() }}</a>
                 </div>
             </div>
         </footer>

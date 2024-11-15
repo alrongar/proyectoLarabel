@@ -59,7 +59,7 @@ class EventController extends Controller
         $event->organizer_id = Auth::id();
         $event->save();
 
-        return redirect()->route('organizer')->with('success', 'Evento actualizado con éxito');
+        return redirect()->route('events.index')->with('success', 'Evento actualizado con éxito');
     }
 
     public function delete($id)
@@ -131,6 +131,6 @@ class EventController extends Controller
         $event->organizer_id = Auth::id();
         $event->save();
 
-        return redirect()->route('organizer.create')->with('success', 'Evento creado exitosamente');
+        return redirect()->route('events.index')->with('success', 'Evento creado exitosamente');
     }
 }
