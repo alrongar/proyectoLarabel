@@ -17,7 +17,7 @@
                                     <img src="{{ asset('storage/' . $event->image_url) }}" class="card-img-top"
                                         alt="Imagen del evento" />
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ Str::limit($event->title, 25) }}</h5>
+                                        <h5 class="card-title">{{ Str::limit($event->title, 20) }}</h5>
                                         <p><strong>Categoría:</strong> {{ $event->category->name }}</p>
                                     </div>
                                 </div>

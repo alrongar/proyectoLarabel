@@ -53,7 +53,7 @@ class EventController extends Controller
         // Manejar la imagen si se proporciona
         if ($request->hasFile('image_url')) {
             $event->image_url = $request->file('image_url')->store('storage/images', 'public');
-        }
+        } 
 
         // Asociar el evento al usuario autenticado
         $event->organizer_id = Auth::id();
@@ -125,6 +125,8 @@ class EventController extends Controller
         // Manejar la imagen si se proporciona
         if ($request->hasFile('image_url')) {
             $event->image_url = $request->file('image_url')->store('storage/images', 'public');
+        } else {
+            $event->image_url = 'storage/images/interrogante.jpg';
         }
 
         // Asociar el evento al usuario autenticado
