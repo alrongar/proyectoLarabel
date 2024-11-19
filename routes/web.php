@@ -49,7 +49,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/confirmar-cuenta/{token}', [ConfirmAccountController::class, 'confirmarCuenta']);
 
 // Ruta para la pantalla de usuario
-Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard')->middleware('auth');
+Route::get('/user/dashboard', [EventController::class, 'index'])->name('user.dashboard')->middleware('auth');
 
 // Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -67,3 +67,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/category/{category}', [EventController::class, 'filterByCategory'])->name('events.filter');
 });
+
+
+Route::get('/events/registered-events', [EventController::class, 'registeredEvents'])->name('events.registered-events');
+Route::post('/event/{eventId}/toggle-registration', [EventController::class, 'toggleRegistration'])->name('event.toggle-registration');

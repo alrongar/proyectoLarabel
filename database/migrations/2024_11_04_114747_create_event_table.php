@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->decimal('longitude', 9,6);
             $table->integer('max_attendees');
             $table->decimal('price', 10, 2);
-            $table->string('image_url')->comment('storage/images/interrogante.jpg');
+            $table->string(column: 'image_url')->comment('storage\images\interrogante.jpg');
             $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
             $table->foreign('organizer_id')->references('id')->on('users')->onDelete('cascade');

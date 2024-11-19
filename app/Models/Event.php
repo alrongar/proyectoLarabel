@@ -37,4 +37,10 @@ class Event extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function attendees()
+    {
+        return $this->belongsToMany(User::class, 'event_attendees', 'event_id', 'user_id')
+            ->withPivot('registered_at');
+    }
 }

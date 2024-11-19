@@ -38,6 +38,16 @@ class DatabaseSeeder extends Seeder
             'image'=>""
         ]);
 
+        User::factory()->create([
+            'name' => 'gordo',
+            'email' => 'user@gmail.com',
+            'password'=> bcrypt('12345678'),
+            'rol' => 'u',
+            'actived' => 1,
+            'email_confirmed' => 1,
+            'image'=>""
+        ]);
+
         $categories = [
             [
                 'name' => 'Music',
@@ -61,7 +71,6 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Payment::factory(10)->create();
         Notification::factory(10)->create();
-        EventAttendee::factory(10)->create();
         Review::factory(10)->create();
     }
 }

@@ -72,12 +72,24 @@ class EventController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->rol !== 'o') {
-            return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
+        if ($user->rol == 'o') {
+            $events = Event::where('organizer_id', $user->id)->get(); // Obtener solo los eventos del organizador
+            $categories = Category::all(); // Obtener todas las categorías
+            return view('user.organizerEvents', compact('events', 'categories')); // Asegúrate de que la vista exista
+    
+        } else if($user->rol == 'u'){
+
+            $title = 'Eventos disponibles';
+            $events = Event::whereDoesntHave('attendees', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->where('start_time', '>', now())
+            ->get(); 
+            
+            $categories = Category::all(); 
+            return view('user.normalUser', compact('events', 'categories', 'title')); // Asegúrate de que la vista exista
         }
-        $events = Event::where('organizer_id', $user->id)->get(); // Obtener solo los eventos del organizador
-        $categories = Category::all(); // Obtener todas las categorías
-        return view('user.organizerEvents', compact('events', 'categories')); // Asegúrate de que la vista exista
+        return redirect()->route('home')->with('error', 'No tienes acceso a esta sección.');
     }
 
     public function filterByCategory(string $categoryName)
@@ -134,5 +146,41 @@ class EventController extends Controller
         $event->save();
 
         return redirect()->route('events.index')->with('success', 'Evento creado exitosamente');
+    }
+
+    public function registeredEvents()
+    {
+        $user = Auth::user(); 
+        $title = 'Eventos registrados';
+        $events = Event::whereHas('attendees', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })
+        ->where('start_time', '>', now())
+        ->get();
+
+        $categories = Category::all(); 
+        return view('user.normalUser', compact('events', 'categories', 'title'));
+    }
+
+    public function toggleRegistration($eventId)
+    {
+        $user = Auth::user(); 
+        $event = Event::findOrFail($eventId); 
+
+        // Verifica si el usuario ya está registrado en el evento
+        $existingRegistration = $event->attendees()->where('user_id', $user->id)->first();
+
+        if ($existingRegistration) {
+            // Si ya está registrado, se cancela la inscripción
+            $event->attendees()->detach($user->id);
+            $message = "Te has desinscrito del evento.";
+        } else {
+            // Si no está registrado, el usuario se registra
+            $event->attendees()->attach($user->id, ['status' => 'confirmed', 'registered_at' => now()]);
+            $message = "Te has inscrito en el evento.";
+        }
+
+        // Redirige con un mensaje
+        return back()->with('message', $message);
     }
 }

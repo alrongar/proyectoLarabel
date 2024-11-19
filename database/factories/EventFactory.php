@@ -31,7 +31,7 @@ class EventFactory extends Factory
             'longitude' => $this->faker->longitude,
             'max_attendees' => $this->faker->numberBetween(10, 100),
             'price' => $this->faker->randomFloat(2, 10, 100),
-            'image_url' => $this->faker->imageUrl(),
+            'image_url' => 'storage\images\interrogante.jpg',
             'deleted' => 0,
         ];
     }

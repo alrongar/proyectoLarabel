@@ -80,6 +80,19 @@
                                     </ul>
                         </div>
                         @endif
+                        @if (Auth::check() && Auth::user()->rol === 'u')
+                        <div class="nav-link dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" id="bot" aria-expanded="false">
+                                        {{ __('Opciones') }}
+                                    </a>
+                                    <!-- Submenú para filtrar eventos -->
+                                    <ul class="dropdown-menu">
+                                        
+                                        <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">Eventos disponibles</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('events.registered-events') }}">Eventos registrados</a></li>
+                                    </ul>
+                        </div>
+                        @endif
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
