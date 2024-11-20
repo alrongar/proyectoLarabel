@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EventController extends Controller
 {
@@ -182,5 +183,17 @@ class EventController extends Controller
 
         // Redirige con un mensaje
         return back()->with('message', $message);
+    }
+
+    public function generatePdf()
+    {
+        $user = Auth::user();
+        $events = Event::whereHas('attendees', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->where('start_time', '>', now())->get();
+
+        $pdf = Pdf::loadView('pdf.registeredEvents', compact('user', 'events'));
+
+        return $pdf->download('registered_events.pdf');
     }
 }

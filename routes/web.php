@@ -71,3 +71,4 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/events/registered-events', [EventController::class, 'registeredEvents'])->name('events.registered-events');
 Route::post('/event/{eventId}/toggle-registration', [EventController::class, 'toggleRegistration'])->name('event.toggle-registration');
+Route::get('/user/registered-events/pdf', [EventController::class, 'generatePdf'])->name('events.registered-events.pdf');

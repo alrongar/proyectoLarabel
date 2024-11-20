@@ -3,12 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 use App\Models\Category; // Asegúrate de que esta línea sea correcta
 use App\Models\User;
+use Carbon\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\evento>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Event>
  */
 class EventFactory extends Factory
 {
@@ -19,13 +19,16 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
+        $start = $this->faker->dateTimeBetween('now', '2044-12-31');
+        $end = $this->faker->dateTimeBetween($start, '2044-12-31');
+
         return [
             'organizer_id' => 2, 
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'category_id' => Category::inRandomOrder()->first()->id,
-            'start_time' => $this->faker->dateTime,
-            'end_time' => $this->faker->dateTime,
+            'start_time' => $start,
+            'end_time' => $end,
             'location' => $this->faker->address,
             'latitude' => $this->faker->latitude,
             'longitude' => $this->faker->longitude,

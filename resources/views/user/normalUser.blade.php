@@ -30,11 +30,11 @@
                                             style="display:inline;">
                                             @csrf
                                             <button type="submit" class="btn 
-                                        @if($event->attendees->contains(Auth::user()->id)) 
-                                            btn-danger
-                                        @else 
-                                            btn-success
-                                        @endif">
+                                                                @if($event->attendees->contains(Auth::user()->id)) 
+                                                                    btn-danger
+                                                                @else 
+                                                                    btn-success
+                                                                @endif">
                                                 @if($event->attendees->contains(Auth::user()->id))
                                                     Anular
                                                 @else
@@ -46,13 +46,13 @@
                                 </div>
                             @endforeach
                         </div>
-
                     @endif
 
-                    
+                    @if ($title === 'Eventos registrados')
+                        <a href="{{ route('events.registered-events.pdf') }}" class="btn btn-primary">Generar PDF</a>
+                    @endif
                 </div>
             </div>
-
         @else
             <h1>Bienvenido a tu panel de usuario</h1>
             <p>Esta es tu pantalla principal. Aquí puedes ver tus eventos y configuraciones.</p>
