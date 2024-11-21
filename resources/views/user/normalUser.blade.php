@@ -30,11 +30,11 @@
                                             style="display:inline;">
                                             @csrf
                                             <button type="submit" class="btn 
-                                                                @if($event->attendees->contains(Auth::user()->id)) 
-                                                                    btn-danger
-                                                                @else 
-                                                                    btn-success
-                                                                @endif">
+                                                                            @if($event->attendees->contains(Auth::user()->id)) 
+                                                                                btn-danger
+                                                                            @else 
+                                                                                btn-success
+                                                                            @endif">
                                                 @if($event->attendees->contains(Auth::user()->id))
                                                     Anular
                                                 @else
@@ -50,6 +50,12 @@
 
                     @if ($title === 'Eventos registrados')
                         <a href="{{ route('events.registered-events.pdf') }}" class="btn btn-primary">Generar PDF</a>
+                    @endif
+                    @if ($title === 'Eventos registrados')
+                        <form action="{{ route('events.send-pdf-email') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-info">Enviar PDF por correo</button>
+                        </form>
                     @endif
                 </div>
             </div>

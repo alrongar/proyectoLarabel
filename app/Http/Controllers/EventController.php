@@ -196,4 +196,20 @@ class EventController extends Controller
 
         return $pdf->download('registered_events.pdf');
     }
+
+    public function sendPdfByEmail()
+    {
+        $user = Auth::user();
+        $events = Event::whereHas('attendees', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->where('start_time', '>', now())->get();
+
+        // Genera el PDF
+        $pdf = Pdf::loadView('pdf.registeredEvents', compact('user', 'events'));
+
+        // Enviar el correo con el PDF adjunto
+        Mail::to($user->email)->send(new RegisteredEventsMail($pdf));
+
+        return back()->with('success', 'El PDF con los eventos registrados ha sido enviado a tu correo.');
+    }
 }
