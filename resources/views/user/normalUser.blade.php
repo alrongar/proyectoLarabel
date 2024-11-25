@@ -52,7 +52,7 @@
                         <a href="{{ route('events.registered-events.pdf') }}" class="btn btn-primary">Generar PDF</a>
                     @endif
                     @if ($title === 'Eventos registrados')
-                        <form action="{{ route('events.send-pdf-email') }}" method="POST">
+                        <form action="{{ route('events.sendPdf') }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-info">Enviar PDF por correo</button>
                         </form>

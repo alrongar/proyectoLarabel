@@ -7,6 +7,8 @@ use App\Models\Event;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisteredEventsMail;
 
 class EventController extends Controller
 {
@@ -208,7 +210,7 @@ class EventController extends Controller
         $pdf = Pdf::loadView('pdf.registeredEvents', compact('user', 'events'));
 
         // Enviar el correo con el PDF adjunto
-        Mail::to($user->email)->send(new RegisteredEventsMail($pdf));
+        Mail::to($user->email)->send(new RegisteredEventsMail($pdf, $user));
 
         return back()->with('success', 'El PDF con los eventos registrados ha sido enviado a tu correo.');
     }

@@ -74,4 +74,4 @@ Route::post('/event/{eventId}/toggle-registration', [EventController::class, 'to
 Route::get('/user/registered-events/pdf', [EventController::class, 'generatePdf'])->name('events.registered-events.pdf');
 
 // mails 
-Route::get('/events/send-pdf', [EventController::class, 'sendPdfByEmail'])->name('events.sendPdf');
+Route::post('/events/send-pdf', [EventController::class, 'sendPdfByEmail'])->name('events.sendPdf');
